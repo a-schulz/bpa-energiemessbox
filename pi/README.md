@@ -2,7 +2,13 @@
 
 ### Prerequisites
 
-Start Node Red with the following command:
+You can start the services using Docker Compose:
+
+```bash
+docker-compose up -d
+```
+
+Alternatively, start Node Red with the following command:
 
 ```bash
 docker run -it -p 1880:1880 --name nodered --restart always -v node_red_data:/data nodered/node-red
@@ -58,13 +64,33 @@ _Note: mqtt is a default package in node red_
 
 ## MQTT Broker
 
-If you don't use an existing MQTT broker, you can use the Eclipse Mosquitto image.
-
-### Setup
-Start Mosquitto with the following command:
+The MQTT broker is automatically started as part of the Docker Compose configuration. If you need to run it separately:
 
 ```bash
 docker run -it -p 1883:1883 --name mosquitto --restart always -v mosquitto_data:/mosquitto/data eclipse-mosquitto
 ```
 
+## Docker Compose Setup
 
+A Docker Compose file is provided in the project root directory to easily start all services with a single command:
+
+```bash
+docker-compose up -d
+```
+
+This will start:
+- Node-RED on port 1880
+- Mosquitto MQTT broker on port 1883
+
+To stop all services:
+
+```bash
+docker-compose down
+```
+
+To view logs:
+
+```bash
+docker-compose logs -f
+```
+`
