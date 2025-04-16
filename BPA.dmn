@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_EE9B137E-C605-4334-95E3-D7847D10A17F" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_5225B4A7-A815-4B04-8D0A-334D97F52A6B" name="BPA" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_EE9B137E-C605-4334-95E3-D7847D10A17F">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_EA0BC164-D5C5-4255-BB60-AE892CB3EA94" name="Energiemessbox_Daten" isCollection="false">
+    <dmn:itemComponent id="_DFCBABDB-C2C0-46A1-9F19-5420B9026FD8" name="Airflow" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_EE1A3706-F406-4657-8354-C2B41F5C529B" name="Pressure" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_76BDBC23-002F-4059-A0B3-113464D3976D" name="Positionsdaten" isCollection="false">
+    <dmn:itemComponent id="_D6143851-D716-491D-BA23-776A598FBF5F" name="x" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_0A5F2785-8641-4248-89F4-C52714D8BAB3" name="y" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_4F3666A3-1573-4F33-8BF3-45303580DB0A" name="z" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_E35CC926-E648-4436-BC68-D0501C9B7570" name="Energiemessbox">
+    <dmn:extensionElements/>
+    <dmn:variable id="_C2A14A75-86F8-4E93-BC0D-2CA73280D6B3" name="Energiemessbox" typeRef="Energiemessbox_Daten"/>
+  </dmn:inputData>
+  <dmn:decision id="_DA5AA12E-C378-4D7F-8C5F-3E8AA1042FFA" name="Regeln">
+    <dmn:extensionElements/>
+    <dmn:variable id="_189A9BBD-3BC6-4BA0-91D4-9257C84A88C8" name="Regeln" typeRef="boolean"/>
+    <dmn:informationRequirement id="_70A7D48B-2216-47D6-A663-2FEBA71B57D7">
+      <dmn:requiredInput href="#_9DDE1DAE-61B7-4B38-9BD0-60F7084490C8"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_2D023A03-EC46-4E90-8801-25F132046A15">
+      <dmn:requiredInput href="#_E35CC926-E648-4436-BC68-D0501C9B7570"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_CCCE1CA4-0CA2-4BA3-B3CC-34FBB2D523CA" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_075AFCD1-6FC2-446B-BFBC-E64BE8816AFD">
+        <dmn:inputExpression id="_A2B465E9-98CD-4FFF-83C1-051C73062A54" typeRef="Energiemessbox_Daten">
+          <dmn:text>Energiemessbox.Airflow</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_6C34753E-D9A0-4D1F-A95A-AC60253923FC">
+        <dmn:inputExpression id="_BE5AA4B7-BAE6-4861-9D81-59865CD3FF2B" typeRef="Energiemessbox_Daten">
+          <dmn:text>Energiemessbox_Daten.Pressure</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_37DC7FC5-C4D5-4EDD-B77E-25FE83D5FE20">
+        <dmn:inputExpression id="_264AF7AB-E8A7-427E-927C-F95699416BC4" typeRef="Positionsdaten">
+          <dmn:text>Positionsdaten.x</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_7727C1D1-0536-421A-96F1-8FC89FCF01E2">
+        <dmn:inputExpression id="_248F6507-464D-4D05-AE08-F6FBFC97DB79" typeRef="Positionsdaten">
+          <dmn:text>Positionsdaten.y</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_BF9D0856-0202-4700-9D4A-EDBE6378BCCB">
+        <dmn:inputExpression id="_F8C7AFF7-77C2-4AA5-905B-AD0B9567F965" typeRef="Positionsdaten">
+          <dmn:text>Positionsdaten.z</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_0409CB9C-E158-46A7-ADF5-666856189818"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_9C01A330-1399-4C90-B8C3-C8C0F8316155">
+        <dmn:inputEntry id="_7A07391D-9F01-454F-BA6C-7DAF3387D42A">
+          <dmn:text>Energiemessbox_Daten.Airflow &gt; 1</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_6874475A-604D-470C-B6C4-D41D0C7014C6">
+          <dmn:text>Energiemessbox_Daten.Pressure &lt; 5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_4984A573-C75F-45A3-905A-E146FC0C1D8E">
+          <dmn:text>Positionsdaten.x = [10..20]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_D1D6357F-A1FE-45DB-AE36-33D6CEA57018">
+          <dmn:text>Positionsdaten.y = [10..20]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_4CF0FC20-5E41-4B0C-8103-F4D3B9E724EB">
+          <dmn:text>Positionsdaten.z = [0..5]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_AF193E98-CFE8-40CB-893D-87234AB3CDC5">
+          <dmn:text>true</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_AFB19483-4930-4340-BE01-945B0C38F474">
+        <dmn:inputEntry id="_35BA6B88-4C43-4ED4-84A7-273878884A5F">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_5D1C0AFF-B26A-4526-955E-FA743EC45F90">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_8B9DE7D2-DF12-48E8-90A7-DAD831F4F8CA">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_D399E875-0419-4773-A69E-4EC8B665B49A">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_773FFA6E-8B83-41E8-9F0D-5BCEE372987B">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_FD70948B-5492-45A8-BD67-58DBB9B307D5">
+          <dmn:text>false</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:inputData id="_9DDE1DAE-61B7-4B38-9BD0-60F7084490C8" name="Positionsdaten">
+    <dmn:extensionElements/>
+    <dmn:variable id="_837E81A3-0AA3-4540-91D1-4EBC7684F701" name="Positionsdaten" typeRef="Positionsdaten"/>
+  </dmn:inputData>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_FA2EF551-F1C6-444F-905D-EA7A04D2DFCD" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_CCCE1CA4-0CA2-4BA3-B3CC-34FBB2D523CA">
+            <kie:width>50</kie:width>
+            <kie:width>291</kie:width>
+            <kie:width>288</kie:width>
+            <kie:width>241</kie:width>
+            <kie:width>234</kie:width>
+            <kie:width>214.5816168939898</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_E35CC926-E648-4436-BC68-D0501C9B7570" dmnElementRef="_E35CC926-E648-4436-BC68-D0501C9B7570" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="211" y="89.68421052631578" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_DA5AA12E-C378-4D7F-8C5F-3E8AA1042FFA" dmnElementRef="_DA5AA12E-C378-4D7F-8C5F-3E8AA1042FFA" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="546" y="183" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_9DDE1DAE-61B7-4B38-9BD0-60F7084490C8" dmnElementRef="_9DDE1DAE-61B7-4B38-9BD0-60F7084490C8" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="211" y="275" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_70A7D48B-2216-47D6-A663-2FEBA71B57D7" dmnElementRef="_70A7D48B-2216-47D6-A663-2FEBA71B57D7">
+        <di:waypoint x="261" y="300"/>
+        <di:waypoint x="596" y="233"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_2D023A03-EC46-4E90-8801-25F132046A15" dmnElementRef="_2D023A03-EC46-4E90-8801-25F132046A15">
+        <di:waypoint x="261" y="114.68421052631578"/>
+        <di:waypoint x="596" y="183"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
