@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  nodered:
+    build:
+      context: nodered
+      dockerfile: Dockerfile
+    container_name: nodered
+    restart: always
+    ports:
+      - "1880:1880"
+    volumes:
+      - node_red_data:/data
+    networks:
+      - iot-network
+    depends_on:
+      - mosquitto
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"  # WebSocket port (optional)
+    volumes:
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+      - ./mosquitto/config:/mosquitto/config
+    networks:
+      - iot-network
+
+networks:
+  iot-network:
+    driver: bridge
+
+volumes:
+  node_red_data:
+  mosquitto_data:
+  mosquitto_log:
