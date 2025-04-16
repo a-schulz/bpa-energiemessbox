@@ -6,5 +6,6 @@ in
       pkgs.opcua-client-gui
       pkgs.node-red
       pkgs.mqttx
+      pkgs.pre-commit
     ];
 }
