@@ -34,9 +34,10 @@ Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.AAS, "REST POST: hasMalfu
 Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.MessageBroker, "publish Topic: personInArea, Service Level 1", $techn="", $tags="", $link="")
 
 Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: Air, Service Level 1", $techn="", $tags="", $link="")
-Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: Malfunction, Service Level 1", $techn="", $tags="", $link="")
+Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: hasMalfunction, Service Level 1", $techn="", $tags="", $link="")
 
-Rel(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: Malfunction, Service Level 1", $techn="", $tags="", $link="")
+Rel(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: hasMalfunction, Service Level 1", $techn="", $tags="", $link="")
+Rel(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: personInArea, Service Level 1", $techn="", $tags="", $link="")
 
 Rel_U(Überwachungssystem.Handschuh, Mitarbeiter, "sendet Warnung (Vibration)", $techn="", $tags="", $link="")
 
