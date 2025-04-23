@@ -20,7 +20,7 @@ workspace "Monitoring System" "Modell basierend auf dem Diagramm mit Benutzerint
                 description "Liest Messdaten via OPC UA und REST, publiziert sie weiter."
             }
 
-            rnhd = container "RNHD" {
+            zigpos = container "ZIGPOS" {
                 technology "REST API"
                 description "Liefert Positionsdaten."
             }
@@ -42,14 +42,15 @@ workspace "Monitoring System" "Modell basierend auf dem Diagramm mit Benutzerint
             }
 
             energiemessbox -> nodered "rPressure, rFlow via OPCUA"
-            rnhd -> nodered "Positionsdaten via REST"
+            zigpos -> nodered "Positionsdaten via REST"
             nodered -> aas "REST POST: Air"
             nodered -> aas "REST POST: Position"
-            nodered -> drools "REST POST: Air and Position"
-            nodered -> aas "REST POST: Malfunction "
+            nodered -> drools "REST POST: Air"
+            drools -> nodered "REST POST Response: Malfunction"
+            nodered -> drools "REST POST: Position"
+            nodered -> aas "REST POST: Malfunction"
             messageBroker -> handschuh "subscribe Topic: Malfunction, Service Level 1"
             handschuh -> mitarbeiter "sendet Warnung (Vibration)"
-            drools -> nodered "REST POST Response: Malfunction"
             aas -> messageBroker "publish Topic: Air, Service Level 1"
             aas -> messageBroker "publish Topic: Position, Service Level 1"
             aas -> messageBroker "publish Topic: Malfunction, Service Level 1"
