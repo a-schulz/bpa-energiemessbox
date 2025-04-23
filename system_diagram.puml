@@ -12,7 +12,7 @@ Person(Mitarbeiter, "Mitarbeiter", $descr="Trägt den Handschuh und erhält Warn
 System_Boundary("Überwachungssystem_boundary", "Überwachungssystem", $tags="") {
   Container(Überwachungssystem.Energiemessbox, "Energiemessbox", $techn="OPC UA", $descr="Liefert Messdaten zu Druck und Luftfluss.", $tags="", $link="")
   Container(Überwachungssystem.NodeRed, "NodeRed", $techn="NodeRed (Flow-basiert)", $descr="Liest Messdaten via OPC UA und REST, publiziert sie weiter.", $tags="", $link="")
-  Container(Überwachungssystem.ZIGPOS, "ZIGPOS", $techn="REST API", $descr="Liefert Positionsdaten.", $tags="", $link="")
+  Container(Überwachungssystem.ZIGPOS, "ZIGPOS", $techn="Websockets", $descr="Liefert Positionsdaten.", $tags="", $link="")
   Container(Überwachungssystem.MessageBroker, "MessageBroker", $techn="MQTT", $descr="Empfangen und Senden von Daten.", $tags="", $link="")
   Container(Überwachungssystem.Handschuh, "Handschuh", $techn="", $descr="Empfängt Warnungen und gibt Vibration als Feedback an den Mitarbeiter.", $tags="", $link="")
   Container(Überwachungssystem.AAS, "AAS", $techn="", $descr="Empfängt Druckluftdaten.", $tags="", $link="")
