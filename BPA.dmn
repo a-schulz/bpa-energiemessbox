@@ -20,87 +20,54 @@
       <dmn:typeRef>number</dmn:typeRef>
     </dmn:itemComponent>
   </dmn:itemDefinition>
-  <dmn:inputData id="_E35CC926-E648-4436-BC68-D0501C9B7570" name="Energiemessbox">
+  <dmn:itemDefinition id="_B998B197-7BC5-4241-B5E5-50A06696D236" name="Entscheidung" isCollection="false">
+    <dmn:typeRef>boolean</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_C6D6E609-C362-4EC1-BFC7-8C3C66AEFD65" name="Energiemessboxdaten">
     <dmn:extensionElements/>
-    <dmn:variable id="_C2A14A75-86F8-4E93-BC0D-2CA73280D6B3" name="Energiemessbox" typeRef="Energiemessbox_Daten"/>
+    <dmn:variable id="_9EA0C64C-BB29-42CB-BDA1-60967CB97836" name="Energiemessboxdaten" typeRef="Energiemessbox_Daten"/>
   </dmn:inputData>
-  <dmn:decision id="_DA5AA12E-C378-4D7F-8C5F-3E8AA1042FFA" name="Regeln">
+  <dmn:decision id="_DF20CFD7-9B87-4DA6-B9C6-A0A6234AE6CD" name="Störung erkennen">
     <dmn:extensionElements/>
-    <dmn:variable id="_189A9BBD-3BC6-4BA0-91D4-9257C84A88C8" name="Regeln" typeRef="boolean"/>
-    <dmn:informationRequirement id="_70A7D48B-2216-47D6-A663-2FEBA71B57D7">
-      <dmn:requiredInput href="#_9DDE1DAE-61B7-4B38-9BD0-60F7084490C8"/>
+    <dmn:variable id="_54DF3008-F5F1-465F-BF52-ACD9B7E1AEB1" name="Störung erkennen" typeRef="Entscheidung"/>
+    <dmn:informationRequirement id="_70DC5825-722E-4F5A-B753-A58C22430C6D">
+      <dmn:requiredInput href="#_C6D6E609-C362-4EC1-BFC7-8C3C66AEFD65"/>
     </dmn:informationRequirement>
-    <dmn:informationRequirement id="_2D023A03-EC46-4E90-8801-25F132046A15">
-      <dmn:requiredInput href="#_E35CC926-E648-4436-BC68-D0501C9B7570"/>
-    </dmn:informationRequirement>
-    <dmn:decisionTable id="_CCCE1CA4-0CA2-4BA3-B3CC-34FBB2D523CA" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
-      <dmn:input id="_075AFCD1-6FC2-446B-BFBC-E64BE8816AFD">
-        <dmn:inputExpression id="_A2B465E9-98CD-4FFF-83C1-051C73062A54" typeRef="Energiemessbox_Daten">
-          <dmn:text>Energiemessbox.Airflow</dmn:text>
+    <dmn:decisionTable id="_4B24CD7C-B1D1-48C2-80FD-A092C8BF80A6" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_1B572317-BD28-403D-B447-623D4D0D7836">
+        <dmn:inputExpression id="_6CE3A072-B8DC-4782-9663-905F9D499ADE" typeRef="number">
+          <dmn:text>Energiemessboxdaten.Airflow</dmn:text>
         </dmn:inputExpression>
       </dmn:input>
-      <dmn:input id="_6C34753E-D9A0-4D1F-A95A-AC60253923FC">
-        <dmn:inputExpression id="_BE5AA4B7-BAE6-4861-9D81-59865CD3FF2B" typeRef="Energiemessbox_Daten">
-          <dmn:text>Energiemessbox_Daten.Pressure</dmn:text>
+      <dmn:input id="_EB936ACA-52E8-4B94-B397-C91B4A911A54">
+        <dmn:inputExpression id="_3AC435A4-4821-475E-85BC-6DCE333B89D9" typeRef="number">
+          <dmn:text>Energiemessboxdaten.Pressure</dmn:text>
         </dmn:inputExpression>
       </dmn:input>
-      <dmn:input id="_37DC7FC5-C4D5-4EDD-B77E-25FE83D5FE20">
-        <dmn:inputExpression id="_264AF7AB-E8A7-427E-927C-F95699416BC4" typeRef="Positionsdaten">
-          <dmn:text>Positionsdaten.x</dmn:text>
-        </dmn:inputExpression>
-      </dmn:input>
-      <dmn:input id="_7727C1D1-0536-421A-96F1-8FC89FCF01E2">
-        <dmn:inputExpression id="_248F6507-464D-4D05-AE08-F6FBFC97DB79" typeRef="Positionsdaten">
-          <dmn:text>Positionsdaten.y</dmn:text>
-        </dmn:inputExpression>
-      </dmn:input>
-      <dmn:input id="_BF9D0856-0202-4700-9D4A-EDBE6378BCCB">
-        <dmn:inputExpression id="_F8C7AFF7-77C2-4AA5-905B-AD0B9567F965" typeRef="Positionsdaten">
-          <dmn:text>Positionsdaten.z</dmn:text>
-        </dmn:inputExpression>
-      </dmn:input>
-      <dmn:output id="_0409CB9C-E158-46A7-ADF5-666856189818"/>
+      <dmn:output id="_DF2C443C-6EE6-4BFC-AF08-0B8C2445D400"/>
       <dmn:annotation name="annotation-1"/>
-      <dmn:rule id="_9C01A330-1399-4C90-B8C3-C8C0F8316155">
-        <dmn:inputEntry id="_7A07391D-9F01-454F-BA6C-7DAF3387D42A">
-          <dmn:text>Energiemessbox_Daten.Airflow &gt; 1</dmn:text>
+      <dmn:rule id="_E1AB0A07-9921-46D1-ABF3-C607F7296DA8">
+        <dmn:inputEntry id="_F8E06DE5-D224-4A66-ADD9-6BB171F3EF4E">
+          <dmn:text>&gt;1</dmn:text>
         </dmn:inputEntry>
-        <dmn:inputEntry id="_6874475A-604D-470C-B6C4-D41D0C7014C6">
-          <dmn:text>Energiemessbox_Daten.Pressure &lt; 5</dmn:text>
+        <dmn:inputEntry id="_187E0529-E85F-450E-8512-D7C13721BF48">
+          <dmn:text>&lt;5</dmn:text>
         </dmn:inputEntry>
-        <dmn:inputEntry id="_4984A573-C75F-45A3-905A-E146FC0C1D8E">
-          <dmn:text>Positionsdaten.x = [10..20]</dmn:text>
-        </dmn:inputEntry>
-        <dmn:inputEntry id="_D1D6357F-A1FE-45DB-AE36-33D6CEA57018">
-          <dmn:text>Positionsdaten.y = [10..20]</dmn:text>
-        </dmn:inputEntry>
-        <dmn:inputEntry id="_4CF0FC20-5E41-4B0C-8103-F4D3B9E724EB">
-          <dmn:text>Positionsdaten.z = [0..5]</dmn:text>
-        </dmn:inputEntry>
-        <dmn:outputEntry id="_AF193E98-CFE8-40CB-893D-87234AB3CDC5">
+        <dmn:outputEntry id="_CB024B0E-BD0A-4BB4-AA50-C20B1E08B008">
           <dmn:text>true</dmn:text>
         </dmn:outputEntry>
         <dmn:annotationEntry>
           <dmn:text/>
         </dmn:annotationEntry>
       </dmn:rule>
-      <dmn:rule id="_AFB19483-4930-4340-BE01-945B0C38F474">
-        <dmn:inputEntry id="_35BA6B88-4C43-4ED4-84A7-273878884A5F">
+      <dmn:rule id="_9C6F1870-BE33-4C5D-8BDD-2898BBB60F55">
+        <dmn:inputEntry id="_A420A44E-743C-4712-A754-A4D983C97B89">
           <dmn:text>-</dmn:text>
         </dmn:inputEntry>
-        <dmn:inputEntry id="_5D1C0AFF-B26A-4526-955E-FA743EC45F90">
+        <dmn:inputEntry id="_43D056E9-A22D-49DD-ACA5-2BFCDA22D78F">
           <dmn:text>-</dmn:text>
         </dmn:inputEntry>
-        <dmn:inputEntry id="_8B9DE7D2-DF12-48E8-90A7-DAD831F4F8CA">
-          <dmn:text>-</dmn:text>
-        </dmn:inputEntry>
-        <dmn:inputEntry id="_D399E875-0419-4773-A69E-4EC8B665B49A">
-          <dmn:text>-</dmn:text>
-        </dmn:inputEntry>
-        <dmn:inputEntry id="_773FFA6E-8B83-41E8-9F0D-5BCEE372987B">
-          <dmn:text>-</dmn:text>
-        </dmn:inputEntry>
-        <dmn:outputEntry id="_FD70948B-5492-45A8-BD67-58DBB9B307D5">
+        <dmn:outputEntry id="_3D1A52AD-820A-4C5F-9C42-8F32AA44E4B9">
           <dmn:text>false</dmn:text>
         </dmn:outputEntry>
         <dmn:annotationEntry>
@@ -109,60 +76,134 @@
       </dmn:rule>
     </dmn:decisionTable>
   </dmn:decision>
-  <dmn:inputData id="_9DDE1DAE-61B7-4B38-9BD0-60F7084490C8" name="Positionsdaten">
+  <dmn:inputData id="_711B7AEE-9FCE-42F0-93FA-4A1C18225F11" name="Positionsdaten">
     <dmn:extensionElements/>
-    <dmn:variable id="_837E81A3-0AA3-4540-91D1-4EBC7684F701" name="Positionsdaten" typeRef="Positionsdaten"/>
+    <dmn:variable id="_8F9FA6AA-B35A-4A03-B9CE-B74ADA08858B" name="Positionsdaten" typeRef="Positionsdaten"/>
   </dmn:inputData>
+  <dmn:decision id="_E2A45F02-4E5B-435D-9B89-64655FCCDDA2" name="Person in Maschinenbereich">
+    <dmn:extensionElements/>
+    <dmn:variable id="_5D44D09B-34F8-4A01-98EB-8A84D1EE2713" name="Person in Maschinenbereich" typeRef="Entscheidung"/>
+    <dmn:informationRequirement id="_6B599EA4-F24E-43AF-BB85-B99AFDDA9026">
+      <dmn:requiredInput href="#_711B7AEE-9FCE-42F0-93FA-4A1C18225F11"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_5A36A6B0-F367-458B-BC8E-FF396B9CFBBE" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_8CA24182-413A-4F23-B0FB-09B210A6C0B4">
+        <dmn:inputExpression id="_14EFC06F-C348-4A50-9136-EB23BBCB73AA" typeRef="number">
+          <dmn:text>Positionsdaten.x</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_5702B6B9-038E-47AF-AC6B-CEABF9EB7472">
+        <dmn:inputExpression id="_37C0F49A-7069-43DD-86AC-206D672C23EB" typeRef="number">
+          <dmn:text>Positionsdaten.y</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_61638042-3042-425F-B4C1-FCD92820E238">
+        <dmn:inputExpression id="_0E0CCF62-1B6B-4C9C-9991-70880353D006" typeRef="number">
+          <dmn:text>Positionsdaten.z</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_5C5229F7-1964-45CA-8905-83B5D9E3B132"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_296094AF-C8F5-4490-B065-5373099B0808">
+        <dmn:inputEntry id="_AE0047EB-5CC5-4CFF-983F-743F85B7FAC0">
+          <dmn:text>&lt;6</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_31303178-405A-44C7-ADAF-EC4A46CD2BC0">
+          <dmn:text>&gt;9</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_DC6678A8-3442-40FB-A370-4CABBF83CA82">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_E2CE9B57-3D89-4AB0-9755-3DD4A46AA38F">
+          <dmn:text>true</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>Ausgemessen mit dem Tag</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_FB052D42-0471-4BB9-B903-F2F304C3E1D0">
+        <dmn:inputEntry id="_D954902C-9F39-4BB7-8AF7-44CA5EA2617D">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_45DBD01B-286D-4894-AEEE-00828F155428">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_90379917-0AA5-4AEF-A0C9-795CE6BBA11B">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_0C99518E-6AC5-46FD-A849-6181A1C830DC">
+          <dmn:text>false</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="_FA2EF551-F1C6-444F-905D-EA7A04D2DFCD" name="DRG">
       <di:extension>
         <kie:ComponentsWidthsExtension>
-          <kie:ComponentWidths dmnElementRef="_CCCE1CA4-0CA2-4BA3-B3CC-34FBB2D523CA">
+          <kie:ComponentWidths dmnElementRef="_4B24CD7C-B1D1-48C2-80FD-A092C8BF80A6">
             <kie:width>50</kie:width>
-            <kie:width>291</kie:width>
-            <kie:width>288</kie:width>
-            <kie:width>241</kie:width>
-            <kie:width>234</kie:width>
-            <kie:width>214.5816168939898</kie:width>
-            <kie:width>100</kie:width>
-            <kie:width>100</kie:width>
+            <kie:width>230</kie:width>
+            <kie:width>233</kie:width>
+            <kie:width>164</kie:width>
+            <kie:width>220</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5A36A6B0-F367-458B-BC8E-FF396B9CFBBE">
+            <kie:width>50</kie:width>
+            <kie:width>146</kie:width>
+            <kie:width>126</kie:width>
+            <kie:width>135</kie:width>
+            <kie:width>209</kie:width>
+            <kie:width>197</kie:width>
           </kie:ComponentWidths>
         </kie:ComponentsWidthsExtension>
       </di:extension>
-      <dmndi:DMNShape id="dmnshape-drg-_E35CC926-E648-4436-BC68-D0501C9B7570" dmnElementRef="_E35CC926-E648-4436-BC68-D0501C9B7570" isCollapsed="false">
+      <dmndi:DMNShape id="dmnshape-drg-_C6D6E609-C362-4EC1-BFC7-8C3C66AEFD65" dmnElementRef="_C6D6E609-C362-4EC1-BFC7-8C3C66AEFD65" isCollapsed="false">
         <dmndi:DMNStyle>
           <dmndi:FillColor red="255" green="255" blue="255"/>
           <dmndi:StrokeColor red="0" green="0" blue="0"/>
           <dmndi:FontColor red="0" green="0" blue="0"/>
         </dmndi:DMNStyle>
-        <dc:Bounds x="211" y="89.68421052631578" width="100" height="50"/>
+        <dc:Bounds x="517" y="341" width="156" height="50"/>
         <dmndi:DMNLabel/>
       </dmndi:DMNShape>
-      <dmndi:DMNShape id="dmnshape-drg-_DA5AA12E-C378-4D7F-8C5F-3E8AA1042FFA" dmnElementRef="_DA5AA12E-C378-4D7F-8C5F-3E8AA1042FFA" isCollapsed="false">
+      <dmndi:DMNShape id="dmnshape-drg-_DF20CFD7-9B87-4DA6-B9C6-A0A6234AE6CD" dmnElementRef="_DF20CFD7-9B87-4DA6-B9C6-A0A6234AE6CD" isCollapsed="false">
         <dmndi:DMNStyle>
           <dmndi:FillColor red="255" green="255" blue="255"/>
           <dmndi:StrokeColor red="0" green="0" blue="0"/>
           <dmndi:FontColor red="0" green="0" blue="0"/>
         </dmndi:DMNStyle>
-        <dc:Bounds x="546" y="183" width="100" height="50"/>
+        <dc:Bounds x="546" y="223" width="100" height="50"/>
         <dmndi:DMNLabel/>
       </dmndi:DMNShape>
-      <dmndi:DMNShape id="dmnshape-drg-_9DDE1DAE-61B7-4B38-9BD0-60F7084490C8" dmnElementRef="_9DDE1DAE-61B7-4B38-9BD0-60F7084490C8" isCollapsed="false">
+      <dmndi:DMNShape id="dmnshape-drg-_711B7AEE-9FCE-42F0-93FA-4A1C18225F11" dmnElementRef="_711B7AEE-9FCE-42F0-93FA-4A1C18225F11" isCollapsed="false">
         <dmndi:DMNStyle>
           <dmndi:FillColor red="255" green="255" blue="255"/>
           <dmndi:StrokeColor red="0" green="0" blue="0"/>
           <dmndi:FontColor red="0" green="0" blue="0"/>
         </dmndi:DMNStyle>
-        <dc:Bounds x="211" y="275" width="100" height="50"/>
+        <dc:Bounds x="730" y="341" width="100" height="50"/>
         <dmndi:DMNLabel/>
       </dmndi:DMNShape>
-      <dmndi:DMNEdge id="dmnedge-drg-_70A7D48B-2216-47D6-A663-2FEBA71B57D7" dmnElementRef="_70A7D48B-2216-47D6-A663-2FEBA71B57D7">
-        <di:waypoint x="261" y="300"/>
-        <di:waypoint x="596" y="233"/>
+      <dmndi:DMNShape id="dmnshape-drg-_E2A45F02-4E5B-435D-9B89-64655FCCDDA2" dmnElementRef="_E2A45F02-4E5B-435D-9B89-64655FCCDDA2" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="719" y="216" width="123" height="64"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_70DC5825-722E-4F5A-B753-A58C22430C6D" dmnElementRef="_70DC5825-722E-4F5A-B753-A58C22430C6D">
+        <di:waypoint x="595" y="366"/>
+        <di:waypoint x="596" y="248"/>
       </dmndi:DMNEdge>
-      <dmndi:DMNEdge id="dmnedge-drg-_2D023A03-EC46-4E90-8801-25F132046A15" dmnElementRef="_2D023A03-EC46-4E90-8801-25F132046A15">
-        <di:waypoint x="261" y="114.68421052631578"/>
-        <di:waypoint x="596" y="183"/>
+      <dmndi:DMNEdge id="dmnedge-drg-_6B599EA4-F24E-43AF-BB85-B99AFDDA9026-AUTO-TARGET" dmnElementRef="_6B599EA4-F24E-43AF-BB85-B99AFDDA9026">
+        <di:waypoint x="780" y="366"/>
+        <di:waypoint x="780.5" y="216"/>
       </dmndi:DMNEdge>
     </dmndi:DMNDiagram>
   </dmndi:DMNDI>
