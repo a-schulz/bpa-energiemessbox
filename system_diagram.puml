@@ -20,7 +20,7 @@ System_Boundary("Überwachungssystem_boundary", "Überwachungssystem", $tags="")
 }
 
 Rel(Überwachungssystem.Energiemessbox, Überwachungssystem.NodeRed, "rPressure, rFlow via OPCUA", $techn="", $tags="", $link="")
-Rel(Überwachungssystem.ZIGPOS, Überwachungssystem.NodeRed, "Positionsdaten via REST", $techn="", $tags="", $link="")
+Rel(Überwachungssystem.ZIGPOS, Überwachungssystem.NodeRed, "Positionsdaten via WEBSOCKETS", $techn="", $tags="", $link="")
 
 Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.Drools, "REST POST: Air", $techn="", $tags="", $link="")
 Rel_R(Überwachungssystem.Drools, Überwachungssystem.NodeRed, "Response: hasMalfunction", $techn="", $tags="", $link="")
