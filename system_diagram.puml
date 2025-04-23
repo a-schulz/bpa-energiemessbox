@@ -22,24 +22,24 @@ System_Boundary("Überwachungssystem_boundary", "Überwachungssystem", $tags="")
 Rel(Überwachungssystem.Energiemessbox, Überwachungssystem.NodeRed, "rPressure, rFlow via OPCUA", $techn="", $tags="", $link="")
 Rel(Überwachungssystem.ZIGPOS, Überwachungssystem.NodeRed, "Positionsdaten via REST", $techn="", $tags="", $link="")
 
-Rel(Überwachungssystem.NodeRed, Überwachungssystem.Drools, "REST POST: Air", $techn="", $tags="", $link="")
-Rel(Überwachungssystem.Drools, Überwachungssystem.NodeRed, "Response: hasMalfunction", $techn="", $tags="", $link="")
+Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.Drools, "REST POST: Air", $techn="", $tags="", $link="")
+Rel_R(Überwachungssystem.Drools, Überwachungssystem.NodeRed, "Response: hasMalfunction", $techn="", $tags="", $link="")
 
-Rel(Überwachungssystem.NodeRed, Überwachungssystem.Drools, "REST POST: Position", $techn="", $tags="", $link="")
-Rel(Überwachungssystem.Drools, Überwachungssystem.NodeRed, "Response: personInArea", $techn="", $tags="", $link="")
+Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.Drools, "REST POST: Position", $techn="", $tags="", $link="")
+Rel_R(Überwachungssystem.Drools, Überwachungssystem.NodeRed, "Response: personInArea", $techn="", $tags="", $link="")
 
-Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.AAS, "REST POST: Air", $techn="", $tags="", $link="")
+Rel_R(Überwachungssystem.NodeRed, Überwachungssystem.AAS, "REST POST: Air", $techn="", $tags="", $link="")
 Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.AAS, "REST POST: hasMalfunction", $techn="", $tags="", $link="")
 
-Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.MessageBroker, "publish Topic: personInArea, Service Level 1", $techn="", $tags="", $link="")
+Rel(Überwachungssystem.NodeRed, Überwachungssystem.MessageBroker, "publish Topic: personInArea, Service Level 1", $techn="", $tags="", $link="")
 
 Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: Air, Service Level 1", $techn="", $tags="", $link="")
 Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: hasMalfunction, Service Level 1", $techn="", $tags="", $link="")
 
-Rel(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: hasMalfunction, Service Level 1", $techn="", $tags="", $link="")
-Rel(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: personInArea, Service Level 1", $techn="", $tags="", $link="")
+Rel_L(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: hasMalfunction, Service Level 1", $techn="", $tags="", $link="")
+Rel_L(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: personInArea, Service Level 1", $techn="", $tags="", $link="")
 
-Rel_U(Überwachungssystem.Handschuh, Mitarbeiter, "sendet Warnung (Vibration)", $techn="", $tags="", $link="")
+Rel_L(Überwachungssystem.Handschuh, Mitarbeiter, "sendet Warnung (Vibration)", $techn="", $tags="", $link="")
 
 SHOW_LEGEND(true)
 @enduml
