@@ -22,7 +22,7 @@ workspace "Monitoring System" "Modell basierend auf dem Diagramm mit Benutzerint
 
             rnhd = container "RNHD" {
                 technology "REST API"
-                description "Liefert zusätzliche Daten via REST."
+                description "Liefert Positionsdaten via REST."
             }
 
             messageBroker = container "MessageBroker" {
@@ -37,13 +37,19 @@ workspace "Monitoring System" "Modell basierend auf dem Diagramm mit Benutzerint
             aas = container "AAS" {
                 description "Empfängt Daten auf Service Level 1."
             }
+            drools = container "Drools"{
+                description "Empfängt Daten auf Service Level 2"
+            }
 
             energiemessbox -> nodered "rPressure, rFlow via OPCUA"
             rnhd -> nodered "REST Positions-Daten"
             nodered -> messageBroker "publish Warning, Airflow, Pressure"
             messageBroker -> handschuh "subscribe Topic: Warning, Service Level 2"
             messageBroker -> aas "subscribe Topic: AAS, Service Level 1"
+            messageBroker -> drools "subscribe Topic: Drools, Service Level 1"
+            drools -> messageBroker "publish Topic: Warning, Service Level 2"
             handschuh -> mitarbeiter "sendet Warnung (Vibration)"
+
         }
     }
 
