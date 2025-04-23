@@ -17,39 +17,41 @@ workspace "Monitoring System" "Modell basierend auf dem Diagramm mit Benutzerint
 
             nodered = container "NodeRed" {
                 technology "NodeRed (Flow-basiert)"
-                description "Verarbeitet Messdaten von OPC UA und RNHD, publiziert sie weiter."
+                description "Liest Messdaten via OPC UA und REST, publiziert sie weiter."
             }
 
             rnhd = container "RNHD" {
                 technology "REST API"
-                description "Liefert Positionsdaten via REST."
+                description "Liefert Positionsdaten."
             }
 
             messageBroker = container "MessageBroker" {
-                technology "MQTT oder ähnliches"
-                description "Empfängt Daten von NodeRed und verteilt sie an Subsysteme."
+                technology "MQTT"
+                description "Empfangen und Senden von Daten."
             }
 
             handschuh = container "Handschuh" {
-                description "Empfängt Warnungen auf Service Level 2 und gibt Vibration als Feedback an den Mitarbeiter."
+                description "Empfängt Warnungen und gibt Vibration als Feedback an den Mitarbeiter."
             }
 
             aas = container "AAS" {
-                description "Empfängt Daten auf Service Level 1."
+                description "Empfängt Druckluftdaten."
             }
             drools = container "Drools"{
-                description "Empfängt Daten auf Service Level 2"
+                description "Wertet Geschäftsregeln aus."
             }
 
             energiemessbox -> nodered "rPressure, rFlow via OPCUA"
-            rnhd -> nodered "REST Positions-Daten"
-            nodered -> messageBroker "publish Warning, Airflow, Pressure"
+            rnhd -> nodered "Positionsdaten via REST"
+            nodered -> aas "REST POST: Air"
+            nodered -> aas "REST POST: Position"
+            nodered -> drools "REST POST: Air and Position"
+            nodered -> aas "REST POST: Malfunction "
             messageBroker -> handschuh "subscribe Topic: Warning, Service Level 2"
             messageBroker -> aas "subscribe Topic: AAS, Service Level 1"
-            messageBroker -> drools "subscribe Topic: Drools, Service Level 1"
-            drools -> messageBroker "publish Topic: Warning, Service Level 2"
+            aas -> messageBroker "subscribe Topic: Air , Service Level 1"
             handschuh -> mitarbeiter "sendet Warnung (Vibration)"
-
+            drools -> nodered "REST POST Response: Malfunction"
         }
     }
 
