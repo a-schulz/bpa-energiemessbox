@@ -7,5 +7,6 @@ in
       pkgs.node-red
       pkgs.mqttx
       pkgs.pre-commit
+      pkgs.graphviz
     ];
 }
