@@ -36,13 +36,13 @@ Rel_R(Überwachungssystem.Drools, Überwachungssystem.NodeRed, "Response: person
 Rel_R(Überwachungssystem.NodeRed, Überwachungssystem.AAS, "REST POST: Air")
 Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.AAS, "REST POST: hasMalfunction")
 
-Rel(Überwachungssystem.NodeRed, Überwachungssystem.MessageBroker, "publish Topic: personInArea")
+Rel(Überwachungssystem.NodeRed, Überwachungssystem.MessageBroker, "publish Topic: personInArea, QoS: 1")
 
-Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: Air")
-Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: hasMalfunction")
+Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: Air, QoS: 1")
+Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: hasMalfunction, QoS: 1")
 
-Rel_L(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: hasMalfunction")
-Rel_L(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: personInArea")
+Rel_L(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: hasMalfunction, QoS: 1")
+Rel_L(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: personInArea, QoS: 1")
 
 Rel_L(Überwachungssystem.Handschuh, Mitarbeiter, "sendet Warnung (Vibration)")
 
