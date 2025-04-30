@@ -30,6 +30,18 @@ services:
     networks:
       - iot-network
 
+  aas:
+    image: eclipsebasyx/aas-environment:2.0.0-SNAPSHOT
+    container_name: aas
+    restart: always
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./aas/aas.properties:/application/application.properties
+      - ./aas/Energiemessbox.aasx:/application/aas/Energiemessbox.aasx
+    networks:
+      - iot-network
+
 networks:
   iot-network:
     driver: bridge
