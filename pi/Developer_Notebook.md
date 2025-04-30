@@ -9,3 +9,12 @@
   sudo chown -R 1000:1000 nodered/data
   
 _See also [this](https://nodered.org/docs/getting-started/docker#using-a-host-directory-for-persistence-bind-mount) guide.
+
+
+## Additional information
+
+### Mosquitto MQTT Setup
+- https://github.com/sukesh-ak/setup-mosquitto-with-docker
+
+### Drools locally
+- https://hub.docker.com/r/jboss/drools-workbench-showcase
