@@ -9,5 +9,6 @@ in
       pkgs.pre-commit
       pkgs.graphviz
       pkgs.openjdk17-bootstrap
+      pkgs.maven
     ];
 }
