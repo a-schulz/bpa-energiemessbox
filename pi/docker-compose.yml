@@ -37,8 +37,8 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ./aas/aas.properties:/application/application.properties
-      - ./aas/Energiemessbox.aasx:/application/aas/Energiemessbox.aasx
+#      - ./aas/aas.properties:/application/application.properties
+      - .aas/energiebox.aasx:/application/aas/energiebox.aasx
     networks:
       - iot-network
 

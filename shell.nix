@@ -8,5 +8,6 @@ in
       pkgs.mqttx
       pkgs.pre-commit
       pkgs.graphviz
+      pkgs.openjdk17-bootstrap
     ];
 }

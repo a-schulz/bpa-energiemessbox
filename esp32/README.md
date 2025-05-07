@@ -30,3 +30,5 @@ Compile, run and monitor the applications serial output executing
 ``` shell
 pio run -t upload -t monitor -e m5stick-c
 ```
+
+The ESP32 client should implement logic to check timestamps on incoming MQTT messages to prevent processing outdated data.
