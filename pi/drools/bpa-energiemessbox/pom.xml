@@ -24,7 +24,7 @@
 
   <groupId>htwd</groupId>
   <artifactId>bpa-energiemessbox</artifactId>
-  <version>0.0.1</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>kjar</packaging>
 
   <name>bpa-energiemessbox</name>
@@ -32,41 +32,53 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>11</maven.compiler.release>
-    <drools-version>10.0.0</drools-version>
-    <slf4j-version>2.0.6</slf4j-version>
-    <junit-version>4.13.1</junit-version>
-    <logback-version>1.4.14</logback-version>
+    <version.drools>10.0.0</version.drools>
+    <version.slf4j>2.0.6</version.slf4j>
+    <version.junit>4.13.1</version.junit>
+    <version.logback>1.4.14</version.logback>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.drools</groupId>
-        <artifactId>drools-bom</artifactId>
-        <type>pom</type>
-        <version>${drools-version}</version>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-dmn-bom</artifactId>
+        <version>${version.drools}</version>
         <scope>import</scope>
+        <type>pom</type>
       </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
-
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-dmn-core</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.drools</groupId>
-      <artifactId>drools-ruleunits-engine</artifactId>
+      <artifactId>drools-xml-support</artifactId>
+    </dependency>
+    <dependency><!-- avoid GenerateModel warnings -->
+      <groupId>org.drools</groupId>
+      <artifactId>drools-model-compiler</artifactId>
     </dependency>
 
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${junit-version}</version>
+      <version>4.13.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-scenario-simulation-backend</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>${logback-version}</version>
+      <version>${version.logback}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -80,10 +92,9 @@
       <plugin>
         <groupId>org.kie</groupId>
         <artifactId>kie-maven-plugin</artifactId>
-        <version>${drools-version}</version>
+        <version>${version.drools}</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>
-
   </build>
 </project>

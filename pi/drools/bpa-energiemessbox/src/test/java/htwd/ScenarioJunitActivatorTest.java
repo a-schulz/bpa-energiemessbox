@@ -19,33 +19,14 @@
 
 package htwd;
 
-public class Measurement {
-    private String id;
-    private String val;
+import org.drools.scenariosimulation.backend.runner.ScenarioJunitActivator;
 
-    public Measurement(String id, String val) {
-        super();
-        this.id = id;
-        this.val = val;
-    }
+/**
+ * ScenarioJunitActivator is a custom JUnit runner that enables the execution of Test Scenario files (*.scesim).
+ * This activator class, when executed, will load all scesim files available in the project and run them.
+ * Each row of the scenario will generate a test JUnit result.
+ */
+@org.junit.runner.RunWith(ScenarioJunitActivator.class)
+public class ScenarioJunitActivatorTest {
 
-    public String getId() {
-        return id;
-    }
-
-    public String getVal() {
-        return val;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Measurement [");
-        if (id != null)
-            builder.append("id=").append(id).append(", ");
-        if (val != null)
-            builder.append("val=").append(val);
-        builder.append("]");
-        return builder.toString();
-    }
 }
