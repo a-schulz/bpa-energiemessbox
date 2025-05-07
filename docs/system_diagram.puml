@@ -1,0 +1,50 @@
+@startuml
+set separator none
+
+title Überwachungssystem - Containers
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+
+!define SPRITESURL https://raw.githubusercontent.com/plantuml-stdlib/gilbarbara-plantuml-sprites/v1.1/sprites
+!includeurl SPRITESURL/drools-icon.puml
+!includeurl SPRITESURL/nodejs.puml
+!include sprites.puml
+
+Person(Mitarbeiter, "Mitarbeiter", $descr="Trägt den Handschuh und erhält Warnungen via Vibration.")
+
+System_Boundary("Überwachungssystem_boundary", "Überwachungssystem") {
+  Container(Überwachungssystem.Energiemessbox, "Energiemessbox", $techn="OPC UA", $descr="Liefert Messdaten zu Druck und Luftfluss.", $sprite="opcua{scale=.1}")
+  Container(Überwachungssystem.NodeRed, "Node-RED", $techn="nodejs", $descr="Liest Messdaten via OPC UA und REST, publiziert sie weiter.", $sprite="nodered{scale=.2}")
+  Container(Überwachungssystem.ZIGPOS, "RTLS", $techn="Websockets", $descr="Liefert Positionsdaten.", $sprite="zigpos{scale=.4}")
+  Container(Überwachungssystem.MessageBroker, "MessageBroker", $techn="MQTT", $descr="Empfangen und Senden von Daten.", $sprite="mqtt{scale=.5}")
+  Container(Überwachungssystem.Handschuh, "Handschuh", $techn="ESP32", $descr="Empfängt Warnungen und gibt Vibration als Feedback.", $sprite="esp32{scale=.05}")
+  Container(Überwachungssystem.AAS, "Asset Administration Shell", $techn="REST API", $descr="Empfängt Druckluftdaten.", $sprite="aas{scale=.8}")
+  Container(Überwachungssystem.Drools, "Drools", $techn="Business Rules Engine", $descr="Wertet Geschäftsregeln aus.", $sprite="drools-icon")
+}
+
+Rel(Überwachungssystem.Energiemessbox, Überwachungssystem.NodeRed, "rPressure, rFlow via OPCUA")
+Rel(Überwachungssystem.ZIGPOS, Überwachungssystem.NodeRed, "Positionsdaten via WEBSOCKETS")
+
+Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.Drools, "REST POST: Air")
+Rel_R(Überwachungssystem.Drools, Überwachungssystem.NodeRed, "Response: hasMalfunction")
+
+Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.Drools, "REST POST: Position")
+Rel_R(Überwachungssystem.Drools, Überwachungssystem.NodeRed, "Response: personInArea")
+
+Rel_R(Überwachungssystem.NodeRed, Überwachungssystem.AAS, "REST POST: Air")
+Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.AAS, "REST POST: hasMalfunction")
+
+Rel(Überwachungssystem.NodeRed, Überwachungssystem.MessageBroker, "publish Topic: personInArea, QoS: 2")
+
+Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: Air, QoS: 1")
+Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: hasMalfunction, QoS: 1")
+
+Rel_L(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: hasMalfunction, QoS: 1")
+Rel_L(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: personInArea, QoS: 2")
+
+Rel_L(Überwachungssystem.Handschuh, Mitarbeiter, "sendet Warnung (Vibration)")
+
+SHOW_LEGEND(true)
+@enduml

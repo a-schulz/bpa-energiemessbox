@@ -70,6 +70,21 @@ The MQTT broker is automatically started as part of the Docker Compose configura
 docker run -it -p 1883:1883 --name mosquitto --restart always -v mosquitto_data:/mosquitto/data eclipse-mosquitto
 ```
 
+## AAS
+
+To get the Basic Setup for the AAS see: https://basyx.org/get-started/introduction:
+REST API Reference: 
+- https://wiki.basyx.org/en/latest/content/user_documentation/API/aas.html
+- or local: http://localhost:8081/swagger-ui/index.html
+
+### Access the BaSyx containers
+- AAS Environment: [http://localhost:8081](http://localhost:8081)
+- AAS Registry: [http://localhost:8082](http://localhost:8082)
+- Submodel Registry: [http://localhost:8083](http://localhost:8083)
+
+### Include your own Asset Administration Shells
+To include your own Asset Administration Shells, you can either put them in the `aas` folder or upload them via the AAS Web UI.
+
 ## Docker Compose Setup
 
 A Docker Compose file is provided in the project root directory to easily start all services with a single command:
