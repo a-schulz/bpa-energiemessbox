@@ -73,7 +73,7 @@ docker run -it -p 1883:1883 --name mosquitto --restart always -v mosquitto_data:
 ## AAS
 
 To get the Basic Setup for the AAS see: https://basyx.org/get-started/introduction:
-
+REST API Reference: https://wiki.basyx.org/en/latest/content/user_documentation/API/aas.html
 
 ### Access the BaSyx containers
 - AAS Environment: [http://localhost:8081](http://localhost:8081)
