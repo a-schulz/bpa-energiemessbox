@@ -1,0 +1,25 @@
+meta {
+  name: Drools Energiemessbox
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/BPA
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "airData": {
+      "airflow": 5,
+      "pressure": 4
+    },
+    "positionData": {
+      "x": 4,
+      "y": 5,
+      "z": 5
+    }
+  }
+}
