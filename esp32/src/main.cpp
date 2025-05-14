@@ -19,9 +19,9 @@ const char* ssid = "nein";
 const char* password = "00001111";
 
 // Open MQTT Broker
-const char* mqtt_server = "test.mosquitto.org";
+const char* mqtt_server = "broker.hivemq.com";
 const int mqtt_port = 1883;                     
-const char* mqtt_topic = "test/topic";
+const char* mqtt_topic = "/test/magnus/demo";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -45,24 +45,19 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println("MQTT: " + message);
   lastMessage = message;
-  if (message == "true") {
+  if (message == "2839") {
     signal(100); // kurze Vibration
   }
 }
 
 void reconnect() {
-  while (!client.connected()) {
+  if (!client.connected()) {
     Serial.print("Versuche MQTT-Verbindung...");
     String clientId = "M5StickClient-" + String(random(0xffff), HEX);
     if (client.connect(clientId.c_str())) {
-      Serial.println("verbunden!");
       client.subscribe(mqtt_topic);
     } else {
-      Serial.print("Fehler, rc=");
       Serial.print(client.state());
-      Serial.println(" Wiederhole in 5 Sekunden...");
-      signal(100);
-      delay(5000);
     }
   }
 }
@@ -90,35 +85,18 @@ void drawMqttStatus(int x, int y) {
 int check = 0;
 void softSignal(){
   check++;
-  if(check%10==0){
-    signal(20);
-  }
-  if (!client.connected()&&WiFi.status() == WL_CONNECTED){
+  if (!client.connected()){
     currentColor = ORANGE;
-    signal(20);
+    if(check%30==0){
+      reconnect();
+      signal(20);
+      check = 0;
+    }
   } else {
     currentColor = CYAN;
   }
 }
 
-
-void animateConnection(int x, int y) {
-  String r;
-  switch(aState) {
-    case 0: r = "[    ]"; break;
-    case 1: r = "[=   ]"; break;
-    case 2: r = "[==  ]"; break;
-    case 3: r = "[=== ]"; break;
-    case 4: r = "[ ===]"; break;
-    case 5: r = "[  ==]"; break;
-    case 6: r = "[   =]"; break;
-    default: r = "[    ]"; aState = -1; break;
-  }
-  aState++;
-  
-  M5.Display.setTextColor(ANIMATION_COLOR);   
-  M5.Display.drawString(r, x, y);
-}
 
 float wavePhase = 0.0;
 void waveAnimation(int x, int baseY) {
@@ -140,6 +118,8 @@ void displayStatus() {
   M5.Display.fillScreen(BACKGROUND_COLOR);
   M5.Display.setTextDatum(top_left);
   softSignal();
+  client.setKeepAlive(3);  // in Sekunden
+
 
   int y = 5;
 
@@ -165,8 +145,6 @@ void displayStatus() {
   M5.Display.drawString("Energie-Messbox", 5, y);
   y += 25;
 
-  // Laufende Animation
-  //animateConnection(5, y);
   waveAnimation(5, y);
   y += 20;
 
@@ -209,10 +187,7 @@ void setup() {
 
 void loop() {
   M5.update();
-  
-  if (!client.connected()) {
-    reconnect();
-  }
+
   client.loop();
   
   displayStatus();
