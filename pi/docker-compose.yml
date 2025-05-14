@@ -62,6 +62,7 @@ services:
         condition: service_healthy
   aas-registry:
     image: eclipsebasyx/aas-registry-log-mongodb:2.0.0-SNAPSHOT
+    platform: linux/arm64
     container_name: aas-registry
     ports:
       - '8082:8080'
@@ -132,17 +133,6 @@ services:
         condition: service_healthy
     volumes:
       - ./logo:/usr/src/app/dist/Logo
-  dashboard-api:
-    image: aaronzi/basyx-dashboard-api:SNAPSHOT_02
-    container_name: dashboard-api
-    ports:
-      - '8085:8085'
-    volumes:
-      - ./basyx/aas-dashboard.yml:/application.yml
-    restart: always
-    depends_on:
-      mongo:
-        condition: service_healthy
 
 volumes:
   node_red_data:
