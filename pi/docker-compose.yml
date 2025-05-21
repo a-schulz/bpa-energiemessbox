@@ -134,5 +134,18 @@ services:
     volumes:
       - ./logo:/usr/src/app/dist/Logo
 
+##################################
+# Drools
+##################################
+  drools:
+    build:
+      context: ./drools
+      dockerfile: Dockerfile
+    container_name: drools
+    restart: always
+    ports:
+      - "8080:8080"
+
 volumes:
   node_red_data:
+
