@@ -18,3 +18,5 @@ _See also [this](https://nodered.org/docs/getting-started/docker#using-a-host-di
 
 ### Drools locally
 - https://hub.docker.com/r/jboss/drools-workbench-showcase
+- Step by step usage of the showcase image
+  - https://vishnu-chalil.medium.com/how-to-setup-drools-workbench-in-local-machine-with-docker-image-c846ca37eab2
