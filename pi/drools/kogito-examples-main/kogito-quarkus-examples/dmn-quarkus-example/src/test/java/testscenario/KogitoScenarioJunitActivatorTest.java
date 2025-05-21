@@ -1,4 +1,4 @@
-/**
+/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -16,17 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
-package htwd;
-
-import org.drools.scenariosimulation.backend.runner.ScenarioJunitActivator;
+package testscenario;
 
 /**
- * ScenarioJunitActivator is a custom JUnit runner that enables the execution of Test Scenario files (*.scesim).
+ * KogitoJunitActivator is a custom JUnit runner that enables the execution of Test Scenario files (*.scesim).
  * This activator class, when executed, will load all scesim files available in the project and run them.
  * Each row of the scenario will generate a test JUnit result.
  */
-@org.junit.runner.RunWith(ScenarioJunitActivator.class)
-public class ScenarioJunitActivatorTest {
+@org.junit.runner.RunWith(org.kogito.scenariosimulation.runner.KogitoJunitActivator.class)
+public class KogitoScenarioJunitActivatorTest {
 
 }
