@@ -1,21 +1,130 @@
 [
     {
-        "id": "36ed5862d13f89d1",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "f6f2187d.f17ca8",
+        "id": "88c44cb39fbde178",
         "type": "tab",
         "label": "Flow 1",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "66067f123a379830",
+        "id": "f10365e5b267c145",
+        "type": "mqtt-broker",
+        "name": "MQTT Chat",
+        "broker": "141.56.229.204",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "7a775fec8e597a77",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.150.9",
+        "port": 1883,
+        "clientid": "nodeRed",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "837867b2b71fb692",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "1698a3fadda02d7c",
+        "type": "websocket-client",
+        "path": "wss://192.168.130.2:8083/rest/socket",
+        "tls": "837867b2b71fb692",
+        "wholemsg": "false",
+        "hb": "0",
+        "subprotocol": "",
+        "headers": []
+    },
+    {
+        "id": "602fcdc3e4666768",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "33c1b54c8766cf35",
         "type": "ui_tab",
         "name": "Home",
         "icon": "dashboard",
@@ -23,7 +132,7 @@
         "hidden": false
     },
     {
-        "id": "a9fb44a1d54c66ee",
+        "id": "9992f3594f79655f",
         "type": "ui_base",
         "theme": {
             "name": "theme-light",
@@ -105,7 +214,7 @@
             "allowSwipe": "false",
             "lockMenu": "false",
             "allowTempTheme": "true",
-            "dateFormat": "DD/MM/YYYY",
+            "dateFormat": "DD.MM.YYYY",
             "sizes": {
                 "sx": 48,
                 "sy": 48,
@@ -119,10 +228,10 @@
         }
     },
     {
-        "id": "e2122570728afb71",
+        "id": "991f803c221f9b09",
         "type": "ui_group",
-        "name": "Default",
-        "tab": "66067f123a379830",
+        "name": "Standard",
+        "tab": "33c1b54c8766cf35",
         "order": 1,
         "disp": true,
         "width": 6,
@@ -130,7 +239,38 @@
         "className": ""
     },
     {
-        "id": "53789e582c34caf1",
+        "id": "958ac685fa151a91",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://141.56.229.204:4840/opcuatest/server/",
+        "secpol": "None",
+        "secmode": "None",
+        "none": true,
+        "login": false,
+        "usercert": false,
+        "usercertificate": "",
+        "userprivatekey": ""
+    },
+    {
+        "id": "367c16f31699de77",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "825a8a13d1d72f3c",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "367c16f31699de77",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "78a6af48ddc3204b",
         "type": "OpcUa-Endpoint",
         "endpoint": "opc.tcp://192.168.14.231:4840",
         "secpol": "None",
@@ -142,9 +282,9 @@
         "userprivatekey": ""
     },
     {
-        "id": "3cc11d24.ff01a2",
+        "id": "be35e6fcad5f3416",
         "type": "comment",
-        "z": "f6f2187d.f17ca8",
+        "z": "88c44cb39fbde178",
         "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
         "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
         "x": 350,
@@ -152,9 +292,9 @@
         "wires": []
     },
     {
-        "id": "a06d4be6f0eb6e65",
+        "id": "46bb9b69af58e65b",
         "type": "inject",
-        "z": "f6f2187d.f17ca8",
+        "z": "88c44cb39fbde178",
         "name": "",
         "props": [
             {
@@ -167,45 +307,24 @@
         ],
         "repeat": "",
         "crontab": "",
-        "once": false,
+        "once": true,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 100,
+        "x": 110,
         "y": 460,
         "wires": [
             [
-                "7202c4156a2d52d3",
-                "57af8c9da16696d7"
+                "d64da7fd7164e496",
+                "638213964e7948db"
             ]
         ]
     },
     {
-        "id": "d0daae59153fa3ba",
-        "type": "ui_text",
-        "z": "f6f2187d.f17ca8",
-        "group": "e2122570728afb71",
-        "order": 0,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Pressure",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 740,
-        "y": 460,
-        "wires": []
-    },
-    {
-        "id": "7202c4156a2d52d3",
+        "id": "d64da7fd7164e496",
         "type": "OpcUa-Item",
-        "z": "f6f2187d.f17ca8",
+        "z": "88c44cb39fbde178",
         "item": "ns=2;s=|var|CECC-LK.Application.GVL.rPressure",
         "datatype": "Double",
         "value": "",
@@ -214,20 +333,20 @@
         "y": 460,
         "wires": [
             [
-                "4ed49002b496d2af"
+                "1d53064a2391df21"
             ]
         ]
     },
     {
-        "id": "4ed49002b496d2af",
+        "id": "1d53064a2391df21",
         "type": "OpcUa-Client",
-        "z": "f6f2187d.f17ca8",
-        "endpoint": "53789e582c34caf1",
+        "z": "88c44cb39fbde178",
+        "endpoint": "78a6af48ddc3204b",
         "action": "subscribe",
         "deadbandtype": "a",
         "deadbandvalue": 1,
-        "time": "1",
-        "timeUnit": "s",
+        "time": "50",
+        "timeUnit": "ms",
         "certificate": "n",
         "localfile": "",
         "localkeyfile": "",
@@ -241,20 +360,20 @@
         "setstatusandtime": false,
         "keepsessionalive": false,
         "name": "",
-        "x": 480,
+        "x": 500,
         "y": 460,
         "wires": [
             [
-                "d0daae59153fa3ba"
+                "6df5120958e22792"
             ],
             [],
             []
         ]
     },
     {
-        "id": "57af8c9da16696d7",
+        "id": "638213964e7948db",
         "type": "OpcUa-Item",
-        "z": "f6f2187d.f17ca8",
+        "z": "88c44cb39fbde178",
         "item": "ns=2;s=|var|CECC-LK.Application.GVL.rFlow",
         "datatype": "Double",
         "value": "",
@@ -263,20 +382,20 @@
         "y": 540,
         "wires": [
             [
-                "58d0e83615841733"
+                "d7e2c7ec8f999b1a"
             ]
         ]
     },
     {
-        "id": "58d0e83615841733",
+        "id": "d7e2c7ec8f999b1a",
         "type": "OpcUa-Client",
-        "z": "f6f2187d.f17ca8",
-        "endpoint": "53789e582c34caf1",
+        "z": "88c44cb39fbde178",
+        "endpoint": "78a6af48ddc3204b",
         "action": "subscribe",
         "deadbandtype": "a",
         "deadbandvalue": 1,
-        "time": "1",
-        "timeUnit": "s",
+        "time": "50",
+        "timeUnit": "ms",
         "certificate": "n",
         "localfile": "",
         "localkeyfile": "",
@@ -290,35 +409,578 @@
         "setstatusandtime": false,
         "keepsessionalive": false,
         "name": "",
-        "x": 480,
+        "x": 500,
         "y": 540,
         "wires": [
             [
-                "9d7fa5eaafd088d6"
+                "416c851781cab3f2"
             ],
             [],
             []
         ]
     },
     {
-        "id": "9d7fa5eaafd088d6",
-        "type": "ui_text",
-        "z": "f6f2187d.f17ca8",
-        "group": "e2122570728afb71",
-        "order": 0,
-        "width": 0,
-        "height": 0,
+        "id": "416c851781cab3f2",
+        "type": "function",
+        "z": "88c44cb39fbde178",
+        "name": "Nachricht Luftfluss",
+        "func": "msg.method = \"PATCH\";\nmsg.topic=\"airflow\";\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\nmsg.payload = JSON.stringify(String(msg.payload));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 520,
+        "wires": [
+            [
+                "465e28ca6c272d63",
+                "a81f470107faf233"
+            ]
+        ]
+    },
+    {
+        "id": "465e28ca6c272d63",
+        "type": "http request",
+        "z": "88c44cb39fbde178",
         "name": "",
-        "label": "Airflow",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://aas-env:8081/submodels/aHR0cHM6Ly9leGFtcGxlLmNvbS9pZHMvc20vNTQ2NV83MDAzXzQwNTJfMTg4Mw/submodel-elements/Airflow/$value",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1010,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ec59f9db783d0629",
+        "type": "http request",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://aas-env:8081/submodels/aHR0cHM6Ly9leGFtcGxlLmNvbS9pZHMvc20vNTQ2NV83MDAzXzQwNTJfMTg4Mw/submodel-elements/Pressure/$value",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1010,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6df5120958e22792",
+        "type": "function",
+        "z": "88c44cb39fbde178",
+        "name": "Nachricht Druck",
+        "func": "msg.method = \"PATCH\";\nmsg.topic = \"pressure\";\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\nmsg.payload = JSON.stringify(String(msg.payload));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 460,
+        "wires": [
+            [
+                "ec59f9db783d0629",
+                "a81f470107faf233"
+            ]
+        ]
+    },
+    {
+        "id": "043844d2c9562eb4",
+        "type": "websocket out",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "server": "",
+        "client": "1698a3fadda02d7c",
         "x": 730,
-        "y": 540,
+        "y": 1020,
         "wires": []
+    },
+    {
+        "id": "8be755b20104ea48",
+        "type": "websocket in",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "server": "",
+        "client": "1698a3fadda02d7c",
+        "x": 260,
+        "y": 940,
+        "wires": [
+            [
+                "4f3b794f49c6dc70"
+            ]
+        ]
+    },
+    {
+        "id": "096686c8c11621bc",
+        "type": "inject",
+        "z": "88c44cb39fbde178",
+        "name": "Positionsdaten abfragen",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "8",
+        "topic": "",
+        "payload": "{ \"topic\":\"REGISTER\", \"payload\":[\"POSITIONS\"] }",
+        "payloadType": "json",
+        "x": 330,
+        "y": 1020,
+        "wires": [
+            [
+                "043844d2c9562eb4"
+            ]
+        ]
+    },
+    {
+        "id": "4f3b794f49c6dc70",
+        "type": "function",
+        "z": "88c44cb39fbde178",
+        "name": "Positionsdaten auslesen",
+        "func": "const targetAddress = \"8121069331292357553\";\n\n// Wenn payload ein String ist → JSON parsen\nlet data;\nmsg.topic=\"coordinates\"\ntry {\n    data = (typeof msg.payload === \"string\") ? JSON.parse(msg.payload) : msg;\n} catch (e) {\n    node.error(\"Ungültiges JSON: \" + e.message);\n    msg.payload=null;\n    return msg;\n}\n\n// Sonderfall: AUTHORIZE_RESP prüfen\nif (\n    data.topic === \"AUTHORIZE_RESP\" &&\n    data.payload &&\n    typeof data.payload.message === \"string\" &&\n    typeof data.payload.code === \"number\"\n) {\n    msg.payload=data.payload.message\n    return msg;\n}\n\n// Normalfall: POSITIONS-Daten verarbeiten\nif (Array.isArray(data.payload)) {\n    const matching = data.payload\n        .filter(p => p.address === targetAddress)\n        .map(p => ({\n            x: p.x,\n            y: p.y,\n            z: p.z\n        }));\n\n    msg.payload=matching\n    return msg;\n} else {\n    node.warn(\"data.payload ist kein Array\");\n    return null;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 940,
+        "wires": [
+            [
+                "a81f470107faf233"
+            ]
+        ]
+    },
+    {
+        "id": "9ed0b7a61bed4ee4",
+        "type": "inject",
+        "z": "88c44cb39fbde178",
+        "name": "API Key jede 55min abfragen",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "3300",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 210,
+        "y": 1220,
+        "wires": [
+            [
+                "433d3cd171a532a9"
+            ]
+        ]
+    },
+    {
+        "id": "8e4eb36b2d79edac",
+        "type": "http request",
+        "z": "88c44cb39fbde178",
+        "name": "API Key request",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://192.168.130.2:8083/rest/oauth/authorization/unauth-token",
+        "tls": "837867b2b71fb692",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 560,
+        "y": 1220,
+        "wires": [
+            [
+                "b6f196b73412f6c9"
+            ]
+        ]
+    },
+    {
+        "id": "433d3cd171a532a9",
+        "type": "function",
+        "z": "88c44cb39fbde178",
+        "name": "body",
+        "func": "msg.headers = {\n    \"Content-Type\": \"application/x-www-form-urlencoded\"\n};\n\nmsg.payload =\n    \"grant_type=password\" +\n    \"&client_id=3039379a-119f-467c-8f94-6ea02b764b99\" +\n    \"&username=zigpos\" +\n    \"&password=zigpos\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1220,
+        "wires": [
+            [
+                "8e4eb36b2d79edac"
+            ]
+        ]
+    },
+    {
+        "id": "b6f196b73412f6c9",
+        "type": "function",
+        "z": "88c44cb39fbde178",
+        "name": "extract API Key",
+        "func": "const token = msg.payload.access_token;\n\nmsg.payload = {\n    topic: \"AUTHORIZE\",\n    payload: token\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 1220,
+        "wires": [
+            [
+                "043844d2c9562eb4"
+            ]
+        ]
+    },
+    {
+        "id": "a81f470107faf233",
+        "type": "join",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": false,
+        "accumulate": false,
+        "timeout": "0.5",
+        "count": "",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 1090,
+        "y": 640,
+        "wires": [
+            [
+                "0f584962471c61cf"
+            ]
+        ]
+    },
+    {
+        "id": "0f584962471c61cf",
+        "type": "function",
+        "z": "88c44cb39fbde178",
+        "name": "Nachricht an Drools zusammenbauen",
+        "func": "let data = msg.payload;\nmsg.payload={};\nmsg.payload.airData = {};\nmsg.payload.positionData = {};\n\nif(!data.hasOwnProperty(\"pressure\")){\n    msg.payload.airData.pressure=null;\n}else{\n    msg.payload.airData.pressure=parseFloat(JSON.parse(data.pressure));\n}\nif(!data.hasOwnProperty(\"airflow\")){\n    msg.payload.airData.airflow=null;\n}else{\n    msg.payload.airData.airflow=parseFloat(JSON.parse(data.airflow));\n}\nif(!data.hasOwnProperty(\"coordinates\")|| (data.coordinates.x===undefined)){\n    msg.payload.positionData=null;\n}else{\n    let len = data.coordinates.length-1\n    msg.payload.positionData.x=data.coordinates[len].x;\n    msg.payload.positionData.y=data.coordinates[len].y;\n    msg.payload.positionData.z=data.coordinates[len].z;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0044dc15d17aa8f5",
+        "type": "http request",
+        "z": "88c44cb39fbde178",
+        "name": "Drools request",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://drools:8080/BPA",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1620,
+        "y": 640,
+        "wires": [
+            [
+                "e15d6bc061722bbb",
+                "97847314590ae81d",
+                "7985c6ed30608f42"
+            ]
+        ]
+    },
+    {
+        "id": "e15d6bc061722bbb",
+        "type": "function",
+        "z": "88c44cb39fbde178",
+        "name": "isPersonInArea",
+        "func": "msg.payload = String(msg.payload.personInArea);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1840,
+        "y": 600,
+        "wires": [
+            [
+                "28ac71f3c9b3da68"
+            ]
+        ]
+    },
+    {
+        "id": "28ac71f3c9b3da68",
+        "type": "mqtt out",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "topic": "personInArea",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "602fcdc3e4666768",
+        "x": 2180,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "354c9cf89ce82ab8",
+        "type": "http request",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://aas-env:8081/submodels/aHR0cHM6Ly9leGFtcGxlLmNvbS9pZHMvc20vNTQ2NV83MDAzXzQwNTJfMTg4Mw/submodel-elements/failure/$value",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 2170,
+        "y": 740,
+        "wires": [
+            [
+                "dccad7de2ecfd901"
+            ]
+        ]
+    },
+    {
+        "id": "97847314590ae81d",
+        "type": "function",
+        "z": "88c44cb39fbde178",
+        "name": "isMalfunction",
+        "func": "msg.method = \"PATCH\";\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\nmsg.payload = JSON.stringify(String(msg.payload.hasMalfunction));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1830,
+        "y": 680,
+        "wires": [
+            [
+                "354c9cf89ce82ab8"
+            ]
+        ]
+    },
+    {
+        "id": "75700c0a14fcbc52",
+        "type": "mqtt out",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "topic": "personInArea",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "602fcdc3e4666768",
+        "x": 1060,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "cec6a9d5ffb864f8",
+        "type": "inject",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "str",
+        "x": 850,
+        "y": 340,
+        "wires": [
+            [
+                "75700c0a14fcbc52"
+            ]
+        ]
+    },
+    {
+        "id": "7985c6ed30608f42",
+        "type": "debug",
+        "z": "88c44cb39fbde178",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1800,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "9b82496da10adffe",
+        "type": "inject",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "str",
+        "x": 850,
+        "y": 280,
+        "wires": [
+            [
+                "75700c0a14fcbc52"
+            ]
+        ]
+    },
+    {
+        "id": "e373accdc5092f93",
+        "type": "inject",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\t   \"airData\":{\t       \"airflow\":5,\t       \"pressure\":4\t    },\t   \"positionData\":{\t       \"x\":4,\t       \"y\":10,\t       \"z\":5\t    }\t}",
+        "payloadType": "jsonata",
+        "x": 1450,
+        "y": 760,
+        "wires": [
+            [
+                "0044dc15d17aa8f5"
+            ]
+        ]
+    },
+    {
+        "id": "dccad7de2ecfd901",
+        "type": "debug",
+        "z": "88c44cb39fbde178",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2380,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "a6d5d101a0ccdacd",
+        "type": "debug",
+        "z": "88c44cb39fbde178",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1300,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "870e42cde6f24b10",
+        "type": "mqtt in",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "topic": "personInArea",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "602fcdc3e4666768",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1150,
+        "y": 280,
+        "wires": [
+            [
+                "a6d5d101a0ccdacd"
+            ]
+        ]
     }
 ]
