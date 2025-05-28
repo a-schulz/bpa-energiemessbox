@@ -4,7 +4,7 @@
 
 Diese Applikation wurde für das IIoT Testbed der HTWD Dresden entwickelt, um Mitarbeitende vor Gefahrenbereichen zu warnen. Das System überwacht Druckluftversorgungssysteme und erkennt Störungen wie Druckabfälle. Wenn ein Mitarbeiter einen Bereich mit einer technischen Störung betritt, erhält dieser eine Warnung über einen speziellen Handschuh mit Vibrationsfeedback.
 
-Excact task specified in [task.md](task.md).
+Die genaue Aufgabenstellung ist in [task.md](task.md) spezifiziert.
 
 ## Systemkomponenten
 
@@ -28,7 +28,7 @@ Das Systemdiagramm ist im PlantUML-Format unter `system_diagram.puml` verfügbar
 4. Node-RED für die Low-Code Entwicklung
 5. Drools als Business Rule Management System
 
-## Getting Started
+## Erste Schritte
 
 1. Starten Sie den MQTT Broker
 2. Stellen Sie die Verbindung zur Energiemessbox über OPC UA her

@@ -1,7 +1,7 @@
 @startuml
 set separator none
 
-title Überwachungssystem - Containers
+title Überwachungssystem - Container
 
 !include <C4/C4>
 !include <C4/C4_Context>
