@@ -38,10 +38,9 @@ Rel_L(Überwachungssystem.NodeRed, Überwachungssystem.AAS, "REST POST: hasMalfu
 
 Rel(Überwachungssystem.NodeRed, Überwachungssystem.MessageBroker, "publish Topic: personInArea, QoS: 2")
 
-Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: Air, QoS: 1")
-Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: hasMalfunction, QoS: 1")
+Rel(Überwachungssystem.AAS, Überwachungssystem.MessageBroker, "publish Topic: sm-repository/sm-repo/submodels/..., QoS: 1")
 
-Rel_L(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: hasMalfunction, QoS: 1")
+Rel_L(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: sm-repository/sm-repo/submodels/.../hasMalfunction/updated, QoS: 1")
 Rel_L(Überwachungssystem.MessageBroker, Überwachungssystem.Handschuh, "subscribe Topic: personInArea, QoS: 2")
 
 Rel_L(Überwachungssystem.Handschuh, Mitarbeiter, "sendet Warnung (Vibration)")
