@@ -512,7 +512,7 @@
         "name": "",
         "server": "",
         "client": "1698a3fadda02d7c",
-        "x": 730,
+        "x": 780,
         "y": 1020,
         "wires": []
     },
@@ -699,7 +699,7 @@
         "type": "function",
         "z": "88c44cb39fbde178",
         "name": "Nachricht an Drools zusammenbauen",
-        "func": "let data = msg.payload;\nmsg.payload={};\nmsg.payload.airData = {};\nmsg.payload.positionData = {};\n\nif(!data.hasOwnProperty(\"pressure\")){\n    msg.payload.airData.pressure=null;\n}else{\n    msg.payload.airData.pressure=parseFloat(JSON.parse(data.pressure));\n}\nif(!data.hasOwnProperty(\"airflow\")){\n    msg.payload.airData.airflow=null;\n}else{\n    msg.payload.airData.airflow=parseFloat(JSON.parse(data.airflow));\n}\nif(!data.hasOwnProperty(\"coordinates\")|| (data.coordinates.x===undefined)){\n    msg.payload.positionData=null;\n}else{\n    let len = data.coordinates.length-1\n    msg.payload.positionData.x=data.coordinates[len].x;\n    msg.payload.positionData.y=data.coordinates[len].y;\n    msg.payload.positionData.z=data.coordinates[len].z;\n}\nreturn msg;",
+        "func": "let data = msg.payload;\nconsole.log(data);\n\n// Vorherige Koordinaten aus dem Flow-Kontext holen\nlet previousPosition = flow.get(\"letzteKoordinaten\") || null;\n\n// Neues Payload-Objekt vorbereiten\nmsg.payload = {\n    airData: {},\n    positionData: previousPosition // Default: alte Koordinaten übernehmen\n};\n\n// === AIR DATA ===\nmsg.payload.airData.pressure = (data.hasOwnProperty(\"pressure\") && data.pressure)\n    ? parseFloat(JSON.parse(data.pressure))\n    : null;\n\nmsg.payload.airData.airflow = (data.hasOwnProperty(\"airflow\") && data.airflow)\n    ? parseFloat(JSON.parse(data.airflow))\n    : null;\n\n// === POSITION DATA ===\nif (Array.isArray(data.coordinates) && data.coordinates.length > 0) {\n    let last = data.coordinates[data.coordinates.length - 1];\n\n    if (last && last.hasOwnProperty(\"x\") && last.hasOwnProperty(\"y\") && last.hasOwnProperty(\"z\")) {\n        msg.payload.positionData = {\n            x: last.x,\n            y: last.y,\n            z: last.z\n        };\n\n        // Neue Koordinaten im Flow-Kontext speichern\n        flow.set(\"letzteKoordinaten\", msg.payload.positionData);\n    }\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -709,7 +709,9 @@
         "x": 1330,
         "y": 640,
         "wires": [
-            []
+            [
+                "0044dc15d17aa8f5"
+            ]
         ]
     },
     {
@@ -734,7 +736,7 @@
             [
                 "e15d6bc061722bbb",
                 "97847314590ae81d",
-                "7985c6ed30608f42"
+                "b9c71f6d3bde918a"
             ]
         ]
     },
@@ -795,9 +797,7 @@
         "x": 2170,
         "y": 740,
         "wires": [
-            [
-                "dccad7de2ecfd901"
-            ]
+            []
         ]
     },
     {
@@ -821,50 +821,7 @@
         ]
     },
     {
-        "id": "75700c0a14fcbc52",
-        "type": "mqtt out",
-        "z": "88c44cb39fbde178",
-        "name": "",
-        "topic": "personInArea",
-        "qos": "2",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "602fcdc3e4666768",
-        "x": 1060,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "cec6a9d5ffb864f8",
-        "type": "inject",
-        "z": "88c44cb39fbde178",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "true",
-        "payloadType": "str",
-        "x": 850,
-        "y": 340,
-        "wires": [
-            [
-                "75700c0a14fcbc52"
-            ]
-        ]
-    },
-    {
-        "id": "7985c6ed30608f42",
+        "id": "694bf0179bae2ac8",
         "type": "debug",
         "z": "88c44cb39fbde178",
         "name": "debug 1",
@@ -872,98 +829,15 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1800,
-        "y": 460,
-        "wires": []
-    },
-    {
-        "id": "9b82496da10adffe",
-        "type": "inject",
-        "z": "88c44cb39fbde178",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "false",
-        "payloadType": "str",
-        "x": 850,
-        "y": 280,
-        "wires": [
-            [
-                "75700c0a14fcbc52"
-            ]
-        ]
-    },
-    {
-        "id": "e373accdc5092f93",
-        "type": "inject",
-        "z": "88c44cb39fbde178",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\t   \"airData\":{\t       \"airflow\":5,\t       \"pressure\":4\t    },\t   \"positionData\":{\t       \"x\":4,\t       \"y\":10,\t       \"z\":5\t    }\t}",
-        "payloadType": "jsonata",
-        "x": 1450,
-        "y": 760,
-        "wires": [
-            [
-                "0044dc15d17aa8f5"
-            ]
-        ]
-    },
-    {
-        "id": "dccad7de2ecfd901",
-        "type": "debug",
-        "z": "88c44cb39fbde178",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2380,
-        "y": 740,
+        "x": 2360,
+        "y": 300,
         "wires": []
     },
     {
-        "id": "a6d5d101a0ccdacd",
-        "type": "debug",
-        "z": "88c44cb39fbde178",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1300,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "870e42cde6f24b10",
+        "id": "9182cb9073332cd8",
         "type": "mqtt in",
         "z": "88c44cb39fbde178",
         "name": "",
@@ -975,12 +849,51 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 1150,
-        "y": 280,
+        "x": 2130,
+        "y": 300,
         "wires": [
-            [
-                "a6d5d101a0ccdacd"
-            ]
+            []
+        ]
+    },
+    {
+        "id": "b9c71f6d3bde918a",
+        "type": "debug",
+        "z": "88c44cb39fbde178",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1760,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "ec9e77d51516b31c",
+        "type": "change",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 800,
+        "wires": [
+            []
         ]
     }
 ]
