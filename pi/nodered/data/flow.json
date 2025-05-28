@@ -736,7 +736,9 @@
             [
                 "e15d6bc061722bbb",
                 "97847314590ae81d",
-                "b9c71f6d3bde918a"
+                "b9c71f6d3bde918a",
+                "28f2564d9bb7cf19",
+                "0919e0642f9c4370"
             ]
         ]
     },
@@ -804,7 +806,7 @@
         "id": "97847314590ae81d",
         "type": "function",
         "z": "88c44cb39fbde178",
-        "name": "isMalfunction",
+        "name": "hasMalfunction",
         "func": "msg.method = \"PATCH\";\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\nmsg.payload = JSON.stringify(String(msg.payload.hasMalfunction));\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
@@ -812,47 +814,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1830,
+        "x": 1840,
         "y": 680,
         "wires": [
             [
                 "354c9cf89ce82ab8"
             ]
-        ]
-    },
-    {
-        "id": "694bf0179bae2ac8",
-        "type": "debug",
-        "z": "88c44cb39fbde178",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 2360,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "9182cb9073332cd8",
-        "type": "mqtt in",
-        "z": "88c44cb39fbde178",
-        "name": "",
-        "topic": "personInArea",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "602fcdc3e4666768",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 2130,
-        "y": 300,
-        "wires": [
-            []
         ]
     },
     {
@@ -895,5 +862,47 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "28f2564d9bb7cf19",
+        "type": "ui_text",
+        "z": "88c44cb39fbde178",
+        "group": "825a8a13d1d72f3c",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "isPersonInArea",
+        "format": "{{msg.payload.personInArea}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1840,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "0919e0642f9c4370",
+        "type": "ui_text",
+        "z": "88c44cb39fbde178",
+        "group": "825a8a13d1d72f3c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "hasMalfunction",
+        "format": "{{msg.payload.hasMalfunction}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1860,
+        "y": 520,
+        "wires": []
     }
 ]
