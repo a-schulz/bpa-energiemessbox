@@ -43,6 +43,19 @@ Das Systemdiagramm ist im PlantUML-Format unter `system_diagram.puml` verfügbar
 
 image::docs/system_diagram.png[System Diagramm]
 
+Das Nodered ist die zentrale Komponente wo alle Daten aus den unterschiedlichen Komponenten rein gehen und versendet werden Da die Energiemessbox nur Polling unterstützt fragt Nodered aller 50 Millisekunden einen neuen Wert ab.
+Das Nodered bekommt aus folgenden Systemen Daten:
+
+* Druckluftdaten, also der derzeitige Druck und der derzeitige Lufstrom beides in Bar kommt über OPCUA an das Nodered.Die Variablennamen aus dem OPCUA sind rFlow und rPressure die NodeIds sind folgende:
+
+** ns=2;s=|var|CECC-LK.Application.GVL.rPressure
+
+** ns=2;s=|var|CECC-LK.Application.GVL.rFlow
+
+
+
+* Die Koordinaten des Zigpos Systems kommen über eine Websocketverbindung in das Nodered. Dabei muss zuerst über REST eine API Key abgefragt werden der 60 Minuten gültig ist und deswegen nach 55 Minuten neu abgefragt wird. Mit diesen Key wird eine Websocketverbindung aufgebaut die auf das Topic POSITIONS hört und jedes Mal eine neue Position bekommt wenn der Zigpos Tag seine Position ändert.
+
 === DMN Diagramm
 
 Das DMN Diagramm beschreibt die Geschäftsregeln. In dem Fall wann eine Warnung an den MD5 Stick geschickt werden soll.
@@ -58,7 +71,7 @@ Aktuell wird eine Störung ausgegeben wenn der Luftstrom größer 10 Bar ist und
 
 image::docs/dmn_person_bereich.png[DMN Diagramm]
 
-Ob sich eine Person im Gefahrenbereich befindet entscheidet sich anhand dieses Diagramm
+Ob sich eine Person im Gefahrenbereich befindet entscheidet sich anhand dieses Diagramms.
 
 === Technische Details
 
