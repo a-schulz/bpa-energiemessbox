@@ -6,7 +6,9 @@ Diese Applikation wurde für das IIoT Testbed der HTWD Dresden entwickelt, um Mi
 
 Excact task specified in [task.md](task.md).
 
-## Systemkomponenten
+## Architektur
+
+### Systemkomponenten
 
 - **Energiemessbox**: Erfasst Messdaten zu Druck und Luftfluss via OPC UA
 - **ZIGPOS**: Liefert Positionsdaten der Mitarbeiter
@@ -16,11 +18,18 @@ Excact task specified in [task.md](task.md).
 - **MQTT Message Broker**: Ermöglicht die Kommunikation zwischen den Komponenten
 - **Handschuh**: IoT-Gerät, das Warnungen empfängt und Vibrationsfeedback gibt
 
-## Systemdiagramm
+### Systemdiagramm
 
 Das Systemdiagramm ist im PlantUML-Format unter `system_diagram.puml` verfügbar und visualisiert die Interaktion der verschiedenen Komponenten.
 
-## Technische Details
+![System Diagramm](docs/system_diagram.png)
+
+### DMN Diagramm
+Das DMN Diagramm beschreibt die Geschäftsregeln. In dem Fall wann eine Warnung an den MD5 Stick geschickt werden soll.
+
+![DMN Diagramm](docs/dmn_overview.png)
+
+### Technische Details
 
 1. OPC-UA zur Abfrage der Druckluftversorgungsdaten
 2. MQTT für die lose Kopplung der Systemkomponenten
