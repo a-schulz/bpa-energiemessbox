@@ -64,6 +64,7 @@ image::docs/dmn_person_bereich.png[DMN Diagramm]
 
 Ob sich eine Person im Gefahrenbereich befindet entscheidet sich anhand dieses Diagramms.
 
+
 === Technische Details
 
 1. OPC-UA zur Abfrage der Druckluftversorgungsdaten
