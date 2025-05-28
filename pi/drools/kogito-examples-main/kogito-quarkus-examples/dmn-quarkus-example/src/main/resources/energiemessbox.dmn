@@ -48,10 +48,10 @@
       <dmn:annotation name="annotation-1"/>
       <dmn:rule id="_E1AB0A07-9921-46D1-ABF3-C607F7296DA8">
         <dmn:inputEntry id="_F8E06DE5-D224-4A66-ADD9-6BB171F3EF4E">
-          <dmn:text>&gt;1</dmn:text>
+          <dmn:text>&gt;10</dmn:text>
         </dmn:inputEntry>
         <dmn:inputEntry id="_187E0529-E85F-450E-8512-D7C13721BF48">
-          <dmn:text>&lt;5</dmn:text>
+          <dmn:text>&lt;5.5</dmn:text>
         </dmn:inputEntry>
         <dmn:outputEntry id="_CB024B0E-BD0A-4BB4-AA50-C20B1E08B008">
           <dmn:text>true</dmn:text>
