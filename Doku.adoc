@@ -39,7 +39,11 @@ Das Nodered bekommt aus folgenden Systemen Daten:
 
 * *Drools:* Drools bekommt vom Nodered die Positionsdaten und die Druckluftdaten und entscheidet dann anhand der DMN Diagramme ob eine Störung vorliegt und ob sich die Person im Gefahrenbereich befindet. Diese Daten bekommt Drools über REST und sendet dann eine Nachricht zurück an das Nodered. Weil im Nodered Flow vor dem Senden an das Drools ein Join Knoten vorgeschalten ist werden die Daten nur dann gesendet wenn dieser Knoten sowohl Positionsdaten und Druckluftdaten gleichzeitig bekommt oder er sendet alles was er bekommen hat nach 0.5 Sekunden an das Drools.
 
-* *MessageBroker:* Nodered schickt an den MessageBroker auf dem Topic personInArea mit Quality of Service 2
+* *MessageBroker:* Nodered schickt an den MessageBroker auf dem Topic personInArea mit Quality of Service 2 das Ergebnis das Drools bezüglich ob sich eine Person im Gebiet der Energiemessbox befindet zurückgesendet hat.Da wir nicht wissen wann neue Positionsdaten zurück kommen wurde Quality of Service 2 genommen, da es am Rand des Gefahrenbereiches dazu kommen kann das die MQTT Pakte in der falschen Reihenfolgen ankommen könnten.
+
+* *Asset Administration Shell (AAS):* Das Nodered schickt die sowohl die Daten aus der Energiemessbox an die AAS als auch ob Drools eine Störung erkannt hat. Dies geschieht über REST jedes Mal wenn neue Daten aus der Energiemessbox kommen oder Drools ein neues Ergebnis zurücksendet. Die AAS sendet automatisch Daten an den Messagebroker jedes Mal wenn sich deren Daten ändern.
+
+Der Handschuh subscribt auf die die beiden Topics hasMalfunction und personInArea und fängt an zu vibrieren wenn bei beiden Topics ein true zurück kommt.Das Topic hasMalfunction ist Quality of Service 1 weil die Energiemessbox alle 50 Millisekunden neue Daten sendet und ein höhere QoS somit mehr Overhead bringen würde.
 
 === DMN Diagramm
 
