@@ -51,40 +51,14 @@ image::docs/dmn_overview.png[DMN Diagramm]
 
 Bei "Störung erkennen" geht es darum wann die Daten aus der Energiemessbox als Störung erkannt werden soll.
 
-image::docs/dmn_overview.png[DMN Diagramm]
+image::docs/dmn_stoerung_erkennen.png[DMN Diagramm]
 
-=== Technische Details
+Aktuell wird eine Störung ausgegeben wenn der Luftstrom größer 10 Bar ist und der Druck auf der Anlange kleiner als 5,5 Bar
 
-1. OPC-UA zur Abfrage der Druckluftversorgungsdaten
-2. MQTT für die lose Kopplung der Systemkomponenten
-3. AAS (Asset Administration Shell) für die Modellierung des Druckluftsystems
-4. Node-RED für die Low-Code Entwicklung
-5. Drools als Business Rule Management System
 
-== Getting Started
+image::docs/dmn_person_bereich.png[DMN Diagramm]
 
-1. Starten Sie den MQTT Broker
-2. Stellen Sie die Verbindung zur Energiemessbox über OPC UA her
-3. Konfigurieren Sie die ZIGPOS-Verbindung für Positionsdaten
-4. Importieren Sie die Node-RED Flows
-5. Starten Sie die Drools-Engine mit den konfigurierten Geschäftsregeln
-6. Verbinden Sie den Handschuh mit dem MQTT Broker
-
-=== Systemdiagramm
-
-Das Systemdiagramm ist im PlantUML-Format unter `system_diagram.puml` verfügbar und visualisiert die Interaktion der verschiedenen Komponenten.
-
-image::docs/system_diagram.png[System Diagramm]
-
-=== DMN Diagramm
-
-Das DMN Diagramm beschreibt die Geschäftsregeln. In dem Fall wann eine Warnung an den MD5 Stick geschickt werden soll.
-
-image::docs/dmn_overview.png[DMN Diagramm]
-
-Bei "Störung erkennen" geht es darum wann die Daten aus der Energiemessbox als Störung erkannt werden soll.
-
-image::docs/dmn_overview.png[DMN Diagramm]
+Ob sich eine Person im Gefahrenbereich befindet entscheidet sich anhand dieses Diagramm
 
 === Technische Details
 
