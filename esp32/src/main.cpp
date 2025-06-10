@@ -4,6 +4,8 @@
 #include <PubSubClient.h>
 #include "cJSON.h"
 
+#include "secret.h"
+
 // Pin-Definition für den Vibrationsmotor
 const int vibPin = 26;
 short aState = 0;
@@ -16,23 +18,17 @@ void signal(short v) {
     digitalWrite(vibPin, LOW);
 }
 
-// CREDENTIALS
-//const char* ssid = "IIoT-Students";
-//const char* password = "b6H948!%^%$9$P";
-
-const char* ssid = "nein";
-const char* password = "00001111";
-
 // Open MQTT Broker
-const char* mqtt_server = "192.168.143.84";
+const char* mqtt_server = "192.168.150.9";
 const int mqtt_port = 1883;                     
 const char* mqtt_topic = "personInArea"; ///
-const char* mqtt_topic2 = "sm-repository/sm-repo/submodels/aHR0cHM6Ly9leGFtcGxlLmNvbS9pZHMvc20vNTQ2NV83MDAzXzQwNTJfMTg4Mw/submodelElements/failure/updated";
+const char* mqtt_topic2 = "sm-repository/sm-repo/submodels/aHR0cHM6Ly9leGFtcGxlLmNvbS9pZHMvc20vNTQ2NV83MDAzXzQwNTJfMTg4Mw/submodelElements/hasMalfunction/updated";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 String lastMessage = "";
 String lastMessage2 = "";
+String statusMessage = "";
 
 // Farbdefinitionen
 #define BACKGROUND_COLOR BLACK
@@ -66,8 +62,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
     //personInArea = (message == "true");
     lastMessage = message;
   } else if (String(topic) == mqtt_topic2) {
-    //hasMalfunction = (message == "true");
-    //String message = "..";
     const char *valuePtr = strstr(message.c_str(), "\"value\"");
 
     if (valuePtr) {
@@ -96,6 +90,7 @@ void reconnect() {
       Serial.print(client.state());
     }
   }
+  signal(20);
 }
 
 void drawWifiStatus(int x, int y) {
@@ -116,19 +111,6 @@ void drawMqttStatus(int x, int y) {
     M5.Display.setTextColor(RED);
     M5.Display.drawString("MQTT: X", x, y);
   }
-}
-
-int check = 0;
-void softSignal(){
-  check++;
-  if (!client.connected()){
-    currentColor = ORANGE;
-    if(check%30==0){
-      reconnect();
-      signal(20);
-      check = 0;
-    }
-  } 
 }
 
 
@@ -152,19 +134,15 @@ void displayStatus() {
   //Serial.println("Tick");
   M5.Display.fillScreen(BACKGROUND_COLOR);
   M5.Display.setTextDatum(top_left);
-  softSignal();
   client.setKeepAlive(12);  // in Sekunden
 
 
   int y = 5;
 
   // Uhrzeit
-  auto t = M5.Rtc.getTime();
-  String timeStr = String(t.hours) + ":" + 
-                   (t.minutes < 10 ? "0" : "") + String(t.minutes);
   M5.Display.setTextColor(TEXT_COLOR);
   M5.Display.setTextSize(2);
-  M5.Display.drawString(timeStr, 5, y);
+  M5.Display.drawString("Beleg Gruppe 3", 5, y);
   y += 25;
 
   // WLAN & MQTT Status (kleiner und untereinander)
@@ -184,21 +162,29 @@ void displayStatus() {
   y += 20;
 
   // Nachricht (beschränkt auf eine Höhe)
-  if (lastMessage != "") {
-    M5.Display.setTextColor(MESSAGE_COLOR);
-    M5.Display.setTextSize(1);
-    M5.Display.drawString("Nachricht:"+lastMessage, 5, y);
-    y += 12;
-    //M5.Display.drawString(lastMessage, 5, y);
-    //y += 15;
+  M5.Display.setTextColor(currentColor);
+  switch(currentColor){
+    case RED:
+      statusMessage = "Warnung!";
+      break;
+    case CYAN:
+      statusMessage = "Keine lokale Gefahrenlage.";
+      break;
+    default:
+      statusMessage = "Keine Verbindung!";
+      break;
   }
 
+  M5.Display.setTextSize(1);
+  M5.Display.drawString("Status: "+statusMessage, 5, y);
+  y += 12;
+
   // Topic-Statusanzeige (unten rechts)
-  //String personSymbol = personInArea ? "O" : "X";
-  //String malfunctionSymbol = hasMalfunction ? "O" : "X";
+  String MP1 = lastMessage == "false" ? "-" : "!";
+  String MP2 = lastMessage2 == "false" ? "-" : "!";
 
   //String statusLine = "PiA:" + personSymbol + "  hM:" + malfunctionSymbol;
-  String statusLine = lastMessage + "/" + lastMessage2;
+  String statusLine = "ZONE: "+ MP1 + " WARN: " + MP2;
   int textWidth = M5.Display.textWidth(statusLine);
   int screenW = M5.Display.width();
   int screenH = M5.Display.height();
@@ -211,14 +197,16 @@ void displayStatus() {
   int batY = M5.Display.height() - 15;
   M5.Display.setTextColor(TEXT_COLOR);
   M5.Display.drawString("Batterie: " + String(M5.Power.getBatteryLevel()) + "%", 5, batY);
-  if (lastMessage == "true" && lastMessage2 == "true") {
-    currentColor = RED;
-    signal(300); // z.B. 150 ms Vibration
-    signal(300);
-    signal(300);
-  } else {
-    currentColor = CYAN;
-  }
+  if (client.connected()) {
+    if (lastMessage == "true" && lastMessage2 == "true") {
+      currentColor = RED;
+      signal(300); // z.B. 150 ms Vibration
+    } else {
+      currentColor = CYAN;
+    }
+    } else {
+      currentColor = ORANGE;
+   } 
 }
 
 void setup() {
@@ -236,33 +224,41 @@ void setup() {
   digitalWrite(vibPin, LOW);
 
   // WiFi verbinden
+  
   WiFi.begin(ssid, password);
-
-  // ✅ Zeitzone setzen (Berlin / Mitteleuropa inkl. Sommerzeit)
-  setenv("TZ", "CET-1CEST,M3.5.0/2,M10.5.0/3", 1);
-  tzset();
-
-  // ✅ Zeit via NTP holen
-  configTime(0, 0, "pool.ntp.org");
-
-  // ⏰ RTC auf aktuelle Zeit setzen
-  struct tm timeinfo;
-  if (getLocalTime(&timeinfo)) {
-    M5.Rtc.setDateTime(timeinfo);
-  }
-
 
   // MQTT Setup
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
 }
 
+
+unsigned long lastReconnectAttempt = 0;
+const unsigned long reconnectInterval = 5000; // alle 5 Sekunden
+unsigned long lastDisplayUpdate = 0;
+const unsigned long displayInterval = 100; // alle 100 ms aktualisieren
+
 void loop() {
   M5.update();
 
   client.loop();
-  
-  displayStatus();
-  
-  delay(100);
+
+
+  // Display-Update (nicht blockierend)
+  unsigned long now = millis();
+  if (now - lastDisplayUpdate >= displayInterval) {
+    lastDisplayUpdate = now;
+    displayStatus();
+  }
+
+  if (!client.connected()) {
+    unsigned long now = millis();
+    if (now - lastReconnectAttempt > reconnectInterval) {
+      lastReconnectAttempt = now;
+      reconnect(); // kann blockieren
+    }
+  }
+  if (lastMessage == "true" && lastMessage2 == "true") {
+    signal(100);
+  }
 }
