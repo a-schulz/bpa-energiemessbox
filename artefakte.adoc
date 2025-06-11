@@ -44,7 +44,7 @@ services:
   # weitere Services für AAS, MongoDB, etc.
 ----
 
-link:pi/docker-compose.yml[Link zur docker compose file]
+link:https://github.com/a-schulz/bpa-energiemessbox/blob/main/pi/docker-compose.yml[Link zur docker compose file]
 
 === Node-RED Flows
 
@@ -57,7 +57,7 @@ Node-RED fungiert als zentrale Integrationsplattform und enthält einen Flows, d
 5. *AAS-Integration*: Aktualisierung der Asset Administration Shell
 6. *Benachrichtigung*: Veröffentlichung von Warnungen über MQTT
 
-link:pi/nodered/data/flow.json[Link zum Node-RED Flow]
+link:https://github.com/a-schulz/bpa-energiemessbox/blob/main/pi/nodered/data/flow.json[Link zum Node-RED Flow]
 
 === Drools Business Rules Engine
 
@@ -68,7 +68,7 @@ Die Drools-Komponente ist als Quarkus-basierter Microservice implementiert und e
 
 Drools bietet REST-Endpunkte für die Auswertung der Regeln, die von Node-RED aufgerufen werden.
 
-link:pi/drools/kogito-examples-main/kogito-quarkus-examples/dmn-quarkus-example/src/main/resources/energiemessbox.dmn[Link zum DMN Modell für Störungserkennung]
+link:https://github.com/a-schulz/bpa-energiemessbox/blob/main/pi/drools/kogito-examples-main/kogito-quarkus-examples/dmn-quarkus-example/src/main/resources/energiemessbox.dmn[Link zum DMN Modell für Störungserkennung]
 
 === Asset Administration Shell (AAS)
 
@@ -80,13 +80,13 @@ Die AAS-Komponenten basieren auf dem Eclipse BaSyx Framework und stellen eine In
 4. *AAS Discovery*: Service zum Auffinden von AAS-Komponenten
 5. *AAS Web UI*: Weboberfläche zur Visualisierung und Interaktion
 
-link:pi/aas/energiebox.aasx[Link zur AAS Definitionsdatei]
+link:https://github.com/a-schulz/bpa-energiemessbox/blob/main/pi/aas/energiebox.aasx[Link zur AAS Definitionsdatei]
 
 === MQTT Message Broker
 
 Der Eclipse Mosquitto MQTT Broker dient als zentrale Kommunikationsplattform und implementiert das Publisher-Subscriber-Muster. Er ermöglicht die lose Kopplung der Systemkomponenten und die zuverlässige Übermittlung von Warnungen an den Handschuh mit konfigurierbaren Quality-of-Service-Levels.
 
-link:pi/mosquitto/config/mosquitto.conf[Link zur MQTT Broker Konfiguration]
+link:https://github.com/a-schulz/bpa-energiemessbox/blob/main/pi/mosquitto/config/mosquitto.conf[Link zur MQTT Broker Konfiguration]
 
 === ESP32-basierter Handschuh
 
@@ -100,4 +100,4 @@ Der Handschuh ist ein tragbares IoT-Gerät, das auf einem ESP32-Mikrocontroller 
 
 Der Handschuh vibrieret stark für 3 Sekunden, wenn sowohl eine Störung erkannt wurde als auch sich die Person im Gefahrenbereich befindet. Bei Verbindungsverlust gibt der Handschuh eine kurze, leichte Vibration aus.
 
-link:esp32/src/main.cpp[Link zum Handschuh Quellcode]
+link:https://github.com/a-schulz/bpa-energiemessbox/blob/main/esp32/src/main.cpp[Link zum Handschuh Quellcode]
