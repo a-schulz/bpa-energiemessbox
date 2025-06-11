@@ -3,7 +3,7 @@ name: Convert and Publish Documentation
 on:
   push:
     branches:
-      - main
+      - deactivated
 
 jobs:
   convert-documentation:
