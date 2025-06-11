@@ -22,13 +22,26 @@ cd bpa-energiemessbox
 * `pi/basyx/*.properties`: Konfiguration der BaSyx-Services
 * `pi/basyx/*.yml`: Konfiguration der Registry-Services
 * `pi/mosquitto/mosquitto.conf`: MQTT-Broker-Konfiguration
-* `pi/nodered/settings.js`: Node-RED-Konfiguration (falls notwendig)
+* `esp32/src/secret.h`: Konfiguration des Handschuhs (WLAN, MQTT-Broker-Adresse)
 
 3. Docker-Images bauen und Container starten:
 +
 [source,bash]
 ----
 docker-compose up -d
+----
+
+Hinweis: Die `platform`-Einstellung (Prozessorarchitektur) muss ggf. angepasst werden, abhängig vom Zielsystem.
+
+[source,yaml]
+----
+    # ...
+
+  aas-registry:
+    image: eclipsebasyx/aas-registry-log-mongodb:2.0.0-SNAPSHOT
+    platform: linux/arm64 # <= HIER anpassen, abhängig vom Zielsystem
+    container_name: aas-registry
+    # ...
 ----
 
 === Konfiguration der Komponenten
@@ -56,11 +69,46 @@ Nach dem Start ist Node-RED unter http://localhost:1880 erreichbar.
 Die Drools-Engine ist nach dem Start unter http://localhost:8080 erreichbar.
 
 1. Überprüfen Sie die DMN-Modelle:
-* Störungserkennung: http://localhost:8080/q/swagger-ui/ → POST /stoerung-erkennen
-* Positionserkennung: http://localhost:8080/q/swagger-ui/ → POST /person-im-bereich
+* Störungserkennung: http://localhost:8080/q/swagger-ui/ → POST /BPA
 
 2. Testen Sie die DMN-Modelle:
 * Verwenden Sie die Swagger-UI, um Testdaten zu senden
++
+Beispiel-Request:
++
+[source,json]
+----
+{
+  "airData": {
+    "airflow": 5,
+    "pressure": 4
+  },
+  "positionData": {
+    "x": 4,
+    "y": 5,
+    "z": 5
+  }
+}
+----
++
+Beispiel-Response:
++
+[source,json]
+----
+{
+  "positionData": {
+    "x": 4,
+    "y": 5,
+    "z": 5
+  },
+  "personInArea": false,
+  "airData": {
+    "airflow": 5,
+    "pressure": 4
+  },
+  "hasMalfunction": true
+}
+----
 
 ==== Asset Administration Shell
 
@@ -68,6 +116,7 @@ Die AAS-Web-UI ist unter http://localhost:3000 erreichbar.
 
 1. Überprüfen Sie, ob die AAS für das Druckluftsystem korrekt angezeigt wird
 2. Kontrollieren Sie die Submodelle und ihre Eigenschaften
+3. In der Web-UI kann auch überprüft werden, ob die Werte korrekt aktualisiert werden.
 
 ==== MQTT-Broker
 
@@ -96,6 +145,14 @@ Für die Inbetriebnahme des Handschuhs:
 5. Überprüfen Sie, ob der Handschuh vibriert
 
 === Troubleshooting
+
+==== Allgemeine Probleme
+
+* Docker kann die Images nicht herunterladen oder bauen.
+** Überprüfen Sie Ihre Internetverbindung
+** Stellen Sie sicher, dass Docker korrekt installiert ist
+** Eventuell ist die Zeit des Systems falsch eingestellt (notwendig für TLS/SSL-Verbindungen)
+*** Stellen Sie die Uhrzeit manuell ein oder synchronisieren Sie sie mit einem NTP-Server `sudo date --set="YYYY-MM-DD HH:MM:SS"`
 
 ==== Node-RED Verbindungsprobleme
 
