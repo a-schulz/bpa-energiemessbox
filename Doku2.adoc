@@ -4,10 +4,13 @@
 :sectnums:
 :source-highlighter: highlight.js
 :icons: font
+:logo: pi/logo/logo_bpa.svg
 
 == Einführung
 
 Diese Applikation wurde für das IIoT Testbed der HTWD Dresden entwickelt, um Mitarbeitende vor Gefahrenbereichen zu warnen. Das System überwacht Druckluftversorgungssysteme und erkennt Störungen wie Druckabfälle. Wenn ein Mitarbeiter einen Bereich mit einer technischen Störung betritt, erhält dieser eine Warnung über einen speziellen Handschuh mit Vibrationsfeedback.
+
+image::{logo}[alt="IIoT Gefahrenbereich-Warnsystem",width=200,height=200,align="center"]
 
 include::architektur.adoc[]
 

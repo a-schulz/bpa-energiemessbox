@@ -30,13 +30,25 @@ services:
     container_name: drools
     # ...
 
+  aas-env:
+    image: eclipsebasyx/aas-environment:2.0.0-SNAPSHOT
+    container_name: aas-env
+    # ...
+
+  aas-registry:
+    image: eclipsebasyx/aas-registry-log-mongodb:2.0.0-SNAPSHOT
+    platform: linux/arm64 # Hinweis: Die `platform`-Einstellung muss ggf. angepasst werden, abhängig vom Zielsystem.
+    container_name: aas-registry
+    # ...
+
   # weitere Services für AAS, MongoDB, etc.
 ----
 
+link:pi/docker-compose.yml[Link zur docker compose file]
 
 === Node-RED Flows
 
-Node-RED fungiert als zentrale Integrationsplattform und enthält mehrere Flows, die die folgenden Aufgaben erfüllen:
+Node-RED fungiert als zentrale Integrationsplattform und enthält einen Flows, der die folgenden Aufgaben erfüllen:
 
 1. *Datenerfassung*: Abfrage der Druckluftdaten von der Energiemessbox über OPC UA
 2. *Positionserfassung*: Empfang von Positionsdaten vom ZIGPOS-System über WebSockets
@@ -44,6 +56,8 @@ Node-RED fungiert als zentrale Integrationsplattform und enthält mehrere Flows,
 4. *Regelauswertung*: Interpretation der Drools-Antworten
 5. *AAS-Integration*: Aktualisierung der Asset Administration Shell
 6. *Benachrichtigung*: Veröffentlichung von Warnungen über MQTT
+
+link:pi/nodered/data/flow.json[Link zum Node-RED Flow]
 
 === Drools Business Rules Engine
 
@@ -53,6 +67,8 @@ Die Drools-Komponente ist als Quarkus-basierter Microservice implementiert und e
 2. *Positionserkennung* (DMN): Bestimmt, ob sich ein Mitarbeiter im Gefahrenbereich befindet
 
 Drools bietet REST-Endpunkte für die Auswertung der Regeln, die von Node-RED aufgerufen werden.
+
+link:pi/drools/kogito-examples-main/kogito-quarkus-examples/dmn-quarkus-example/src/main/resources/energiemessbox.dmn[Link zum DMN Modell für Störungserkennung]
 
 === Asset Administration Shell (AAS)
 
@@ -64,9 +80,13 @@ Die AAS-Komponenten basieren auf dem Eclipse BaSyx Framework und stellen eine In
 4. *AAS Discovery*: Service zum Auffinden von AAS-Komponenten
 5. *AAS Web UI*: Weboberfläche zur Visualisierung und Interaktion
 
+link:pi/aas/energiebox.aasx[Link zur AAS Definitionsdatei]
+
 === MQTT Message Broker
 
 Der Eclipse Mosquitto MQTT Broker dient als zentrale Kommunikationsplattform und implementiert das Publisher-Subscriber-Muster. Er ermöglicht die lose Kopplung der Systemkomponenten und die zuverlässige Übermittlung von Warnungen an den Handschuh mit konfigurierbaren Quality-of-Service-Levels.
+
+link:pi/mosquitto/config/mosquitto.conf[Link zur MQTT Broker Konfiguration]
 
 === ESP32-basierter Handschuh
 
@@ -79,3 +99,5 @@ Der Handschuh ist ein tragbares IoT-Gerät, das auf einem ESP32-Mikrocontroller 
 5. Fehlertolerante Implementierung (Verbindungsverlusterkennung)
 
 Der Handschuh vibrieret stark für 3 Sekunden, wenn sowohl eine Störung erkannt wurde als auch sich die Person im Gefahrenbereich befindet. Bei Verbindungsverlust gibt der Handschuh eine kurze, leichte Vibration aus.
+
+link:esp32/src/main.cpp[Link zum Handschuh Quellcode]

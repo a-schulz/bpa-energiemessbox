@@ -73,13 +73,17 @@ Node-RED sendet zwei Arten von Daten an die Drools Rules Engine:
 1. *Druckluftdaten*: Druck und Durchfluss für die Erkennung von Störungen
 2. *Positionsdaten*: Koordinaten des Mitarbeiters für die Erkennung, ob sich die Person im Gefahrenbereich befindet
 
+Node-RED speichert die zuletzt empfangenen Positionsdaten zwischen, um sicherzustellen, dass Drools auch dann Positionsdaten erhält, wenn sich die Person im Gefahrenbereich befindet und keine Bewegung stattfindet (keine neuen Datem vom ZIGPOS). Im Node-RED Flow ist ein Join-Knoten integriert, der die Daten nur dann an Drools weiterleitet, wenn sowohl Positionsdaten als auch Druckluftdaten gleichzeitig vorliegen, oder nach spätestens 0,5 Sekunden alle verfügbaren Daten sendet.
+
 Drools antwortet mit:
+
 * `hasMalfunction`: Boolean-Wert, der angibt, ob eine Störung erkannt wurde
 * `personInArea`: Boolean-Wert, der angibt, ob sich die Person im Gefahrenbereich befindet
 
 ==== REST-Schnittstelle zur Asset Administration Shell (AAS)
 
-Node-RED sendet folgende Daten an die AAS:
+Node-RED sendet folgende Daten an die AAS, um den digitalen Zwilling des Druckluftsystems zu aktualisieren:
+
 1. Aktuelle Druckluftdaten aus der Energiemessbox
 2. Ergebnis der Störungserkennung von Drools (`hasMalfunction`)
 
@@ -92,6 +96,8 @@ Der MQTT Broker dient als zentrale Kommunikationsplattform. Der Handschuh abonni
 1. `sm-repository/sm-repo/submodels/.../hasMalfunction/updated` (QoS 1): Information über erkannte Störungen
 2. `personInArea` (QoS 2): Information darüber, ob sich die Person im Gefahrenbereich befindet
 
+Bei positiven Signalen (true) auf beiden Topics vibriert der Handschuh stark für 3 Sekunden. QoS 1 wurde für das hasMalfunction-Topic gewählt, da die Energiemessbox alle 50 Millisekunden neue Daten sendet und ein höherer QoS unnötigen Overhead erzeugen würde. Das personInArea-Topic verwendet QoS 2, um an Randbereichen die korrekte Paket-Reihenfolge sicherzustellen. Der Handschuh gibt außerdem eine kurze, leichte Vibration aus, wenn die Netzwerkverbindung verloren geht.
+
 === Geschäftsregeln
 
 Die Geschäftsregeln werden in Drools durch DMN-Diagramme (Decision Model and Notation) definiert.
@@ -102,8 +108,11 @@ image::docs/dmn_overview.png[DMN Übersicht,600]
 ==== Störungserkennung
 
 Eine Störung wird erkannt, wenn:
+
 * Der Luftstrom größer als 10 Bar ist UND
 * Der Druck kleiner als 5,5 Bar ist
+
+Die DMN-Hitpolicy für die Störungserkennung ist `FIRST`, sodass nur die erste zutreffende Regel ausgewertet wird.
 
 .DMN Störungserkennung
 image::docs/dmn_stoerung_erkennen.png[DMN Störungserkennung,600]
