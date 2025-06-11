@@ -72,7 +72,8 @@ Die Drools-Engine ist nach dem Start unter http://localhost:8080 erreichbar.
 * Störungserkennung: http://localhost:8080/q/swagger-ui/ → POST /BPA
 
 2. Testen Sie die DMN-Modelle:
-* Verwenden Sie die Swagger-UI, um Testdaten zu senden
+* Verwenden Sie die Swagger-UI oder Bruno (HTTP Client), um Testdaten zu senden.
+* link:bruno/[Bruno Requestdefinitionen]
 +
 Beispiel-Request:
 +
