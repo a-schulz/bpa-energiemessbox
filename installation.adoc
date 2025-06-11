@@ -1,0 +1,117 @@
+== Einrichtung und Inbetriebnahme
+
+=== Systemvoraussetzungen
+
+* Docker und Docker Compose (Version 1.29+)
+* Netzwerkverbindung zur Energiemessbox (OPC UA)
+* Netzwerkverbindung zum ZIGPOS-System
+* WLAN-Netzwerk für den Handschuh
+
+=== Installation
+
+1. Repository klonen:
++
+[source,bash]
+----
+git clone https://github.com/a-schulz/bpa-energiemessbox.git
+cd bpa-energiemessbox
+----
+
+2. Konfigurationsdateien anpassen:
++
+* `pi/basyx/*.properties`: Konfiguration der BaSyx-Services
+* `pi/basyx/*.yml`: Konfiguration der Registry-Services
+* `pi/mosquitto/mosquitto.conf`: MQTT-Broker-Konfiguration
+* `pi/nodered/settings.js`: Node-RED-Konfiguration (falls notwendig)
+
+3. Docker-Images bauen und Container starten:
++
+[source,bash]
+----
+docker-compose up -d
+----
+
+=== Konfiguration der Komponenten
+
+==== Node-RED
+
+Nach dem Start ist Node-RED unter http://localhost:1880 erreichbar.
+
+1. Überprüfen Sie die Verbindung zur Energiemessbox:
+* Konfigurieren Sie die OPC UA-Verbindung mit der korrekten Serveradresse
+* Testen Sie die Verbindung mit dem "inject"-Knoten
+
+2. Konfigurieren Sie die ZIGPOS-Verbindung:
+* Tragen Sie die API-Zugangsdaten ein
+* Überprüfen Sie die WebSocket-Verbindung
+
+3. Konfigurieren Sie die Drools-Verbindung:
+* Stellen Sie sicher, dass die HTTP-Endpunkte korrekt konfiguriert sind
+
+4. Konfigurieren Sie die AAS-Verbindung:
+* Überprüfen Sie die REST-Endpunkte
+
+==== Drools
+
+Die Drools-Engine ist nach dem Start unter http://localhost:8080 erreichbar.
+
+1. Überprüfen Sie die DMN-Modelle:
+* Störungserkennung: http://localhost:8080/q/swagger-ui/ → POST /stoerung-erkennen
+* Positionserkennung: http://localhost:8080/q/swagger-ui/ → POST /person-im-bereich
+
+2. Testen Sie die DMN-Modelle:
+* Verwenden Sie die Swagger-UI, um Testdaten zu senden
+
+==== Asset Administration Shell
+
+Die AAS-Web-UI ist unter http://localhost:3000 erreichbar.
+
+1. Überprüfen Sie, ob die AAS für das Druckluftsystem korrekt angezeigt wird
+2. Kontrollieren Sie die Submodelle und ihre Eigenschaften
+
+==== MQTT-Broker
+
+Der MQTT-Broker kann mit einem MQTT-Client wie MQTT Explorer (http://mqtt-explorer.com/) überprüft werden:
+
+1. Verbinden Sie sich mit dem Broker unter localhost:1883
+2. Abonnieren Sie die Topics:
+* `sm-repository/sm-repo/submodels/.../hasMalfunction/updated`
+* `personInArea`
+
+==== Handschuh
+
+Für die Inbetriebnahme des Handschuhs:
+
+1. Laden Sie die Firmware auf den ESP32
+2. Verbinden Sie den ESP32 mit dem WLAN-Netzwerk
+3. Konfigurieren Sie die MQTT-Verbindung mit der Broker-Adresse
+4. Überprüfen Sie die Vibrationsfunktion
+
+=== Testen des Gesamtsystems
+
+1. Starten Sie alle Services mit `docker-compose up -d`
+2. Überprüfen Sie, ob alle Komponenten korrekt gestartet wurden
+3. Simulieren Sie eine Druckluftstörung (hoher Luftstrom, niedriger Druck)
+4. Bewegen Sie den ZIGPOS-Tag in den Gefahrenbereich
+5. Überprüfen Sie, ob der Handschuh vibriert
+
+=== Troubleshooting
+
+==== Node-RED Verbindungsprobleme
+
+* Überprüfen Sie die OPC UA-Verbindung zur Energiemessbox
+* Kontrollieren Sie die ZIGPOS-API-Zugangsdaten
+* Prüfen Sie die Drools-Endpunkte mit einem HTTP-Client
+
+==== MQTT-Verbindungsprobleme
+
+* Stellen Sie sicher, dass der MQTT-Broker läuft
+* Überprüfen Sie die Zugriffsrechte und die Konfiguration
+* Kontrollieren Sie die Topics und QoS-Einstellungen
+
+==== Handschuh reagiert nicht
+
+* Überprüfen Sie die WLAN-Verbindung des ESP32
+* Kontrollieren Sie die MQTT-Verbindung
+* Prüfen Sie die Batteriespannung
+* Testen Sie den Vibrationsmotor manuell

@@ -1,0 +1,81 @@
+== Entwickelte Artefakte und verwendete Services
+
+=== Docker-basierte Systemumgebung
+
+Das gesamte System wird mittels Docker Compose bereitgestellt, was eine einfache Deployment- und Betriebsstrategie ermöglicht. Alle Komponenten sind als Container definiert und können gemeinsam gestartet werden.
+
+[source,yaml]
+----
+# Auszug aus docker-compose.yml
+services:
+  nodered:
+    build:
+      context: nodered
+      dockerfile: Dockerfile
+    container_name: nodered
+    restart: always
+    ports:
+      - "1880:1880"
+    # ...
+
+  mosquitto:
+    image: eclipse-mosquitto:2.0.15
+    container_name: mosquitto
+    # ...
+
+  drools:
+    build:
+      context: ./drools
+      dockerfile: Dockerfile
+    container_name: drools
+    # ...
+
+  # weitere Services für AAS, MongoDB, etc.
+----
+
+
+=== Node-RED Flows
+
+Node-RED fungiert als zentrale Integrationsplattform und enthält mehrere Flows, die die folgenden Aufgaben erfüllen:
+
+1. *Datenerfassung*: Abfrage der Druckluftdaten von der Energiemessbox über OPC UA
+2. *Positionserfassung*: Empfang von Positionsdaten vom ZIGPOS-System über WebSockets
+3. *Datenverarbeitung*: Kombination der Daten und Weiterleitung an Drools
+4. *Regelauswertung*: Interpretation der Drools-Antworten
+5. *AAS-Integration*: Aktualisierung der Asset Administration Shell
+6. *Benachrichtigung*: Veröffentlichung von Warnungen über MQTT
+
+=== Drools Business Rules Engine
+
+Die Drools-Komponente ist als Quarkus-basierter Microservice implementiert und enthält die DMN-Modelle zur Auswertung der Geschäftsregeln:
+
+1. *Störungserkennung* (DMN): Bestimmt, ob die aktuelle Druckluftsituation eine Störung darstellt
+2. *Positionserkennung* (DMN): Bestimmt, ob sich ein Mitarbeiter im Gefahrenbereich befindet
+
+Drools bietet REST-Endpunkte für die Auswertung der Regeln, die von Node-RED aufgerufen werden.
+
+=== Asset Administration Shell (AAS)
+
+Die AAS-Komponenten basieren auf dem Eclipse BaSyx Framework und stellen eine Industrie 4.0-konforme Modellierung des Druckluftsystems als digitaler Zwilling bereit. Folgende BaSyx-Services werden verwendet:
+
+1. *AAS Environment*: Hosting der Asset Administration Shell
+2. *AAS Registry*: Zentrales Verzeichnis der verfügbaren AAS
+3. *Submodel Registry*: Verzeichnis der Submodelle
+4. *AAS Discovery*: Service zum Auffinden von AAS-Komponenten
+5. *AAS Web UI*: Weboberfläche zur Visualisierung und Interaktion
+
+=== MQTT Message Broker
+
+Der Eclipse Mosquitto MQTT Broker dient als zentrale Kommunikationsplattform und implementiert das Publisher-Subscriber-Muster. Er ermöglicht die lose Kopplung der Systemkomponenten und die zuverlässige Übermittlung von Warnungen an den Handschuh mit konfigurierbaren Quality-of-Service-Levels.
+
+=== ESP32-basierter Handschuh
+
+Der Handschuh ist ein tragbares IoT-Gerät, das auf einem ESP32-Mikrocontroller basiert. Es bietet folgende Funktionen:
+
+1. WLAN-Konnektivität für die Verbindung zum MQTT Broker
+2. MQTT-Client für den Empfang von Warnungen
+3. Vibrationsmotor für haptisches Feedback
+4. Batteriebetrieb für mobile Nutzung
+5. Fehlertolerante Implementierung (Verbindungsverlusterkennung)
+
+Der Handschuh vibrieret stark für 3 Sekunden, wenn sowohl eine Störung erkannt wurde als auch sich die Person im Gefahrenbereich befindet. Bei Verbindungsverlust gibt der Handschuh eine kurze, leichte Vibration aus.
