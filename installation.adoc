@@ -111,6 +111,29 @@ Beispiel-Response:
 }
 ----
 
+===== Anpassen der DMN Regeln
+
+Um die Geschäftsregeln anzupassen (z.B. Schwellenwerte für die Störungserkennung oder Koordinaten des Gefahrenbereichs):
+
+. Öffnen Sie die DMN-Datei im Editor:
+** Pfad: `pi/drools/kogito-examples-main/kogito-quarkus-examples/dmn-quarkus-example/src/main/resources/energiemessbox.dmn`
+** Empfohlene DMN-Editoren: KIE DMN Editor (verfügbar unter https://kie.apache.org/docs/start/download)
+. Bearbeiten der Regeln:
+** Für die Störungserkennung passen Sie die Schwellenwerte für Luftdruck und Luftstrom an
+** Für den Gefahrenbereich definieren Sie die X/Y/Z-Koordinaten des überwachten Bereichs
+** Speichern Sie die Änderungen
+. Nach der Änderung bauen Sie den Drools-Container neu:
++
+[source,bash]
+----
+# Standard Build
+docker compose up drools --build
+
+# Bei Problemen mit dem Maven-Cache
+docker compose up drools --build --no-cache
+----
+. Testen Sie die geänderten Regeln über die Swagger-UI (http://localhost:8080/q/swagger-ui/)
+
 ==== Asset Administration Shell
 
 Die AAS-Web-UI ist unter http://localhost:3000 erreichbar.
@@ -149,6 +172,24 @@ Für die Inbetriebnahme des Handschuhs:
 5. Überprüfen Sie, ob der Handschuh vibriert
 
 === Troubleshooting
+
+==== Neustarten der Services
+
+Falls Probleme mit den laufenden Containern auftreten oder Konfigurationsänderungen wirksam werden sollen, können Sie die Services wie folgt neustarten:
+
+[source,bash]
+----
+# Navigieren Sie zum Projektverzeichnis
+cd bpa-energiemessbox/pi
+
+# Stoppen und entfernen Sie alle Container
+docker-compose down
+
+# Starten Sie die Container neu
+docker-compose up -d
+----
+
+Der Parameter `-d` startet die Container im Hintergrund (detached mode). Entfernen Sie diesen Parameter, um die Container-Logs direkt im Terminal zu sehen.
 
 ==== Allgemeine Probleme
 

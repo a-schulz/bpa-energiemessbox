@@ -5,15 +5,49 @@
 :source-highlighter: highlight.js
 :icons: font
 :logo: pi/logo/logo_bpa.svg
+:toc-title: Inhaltsübersicht
+:pdf-page-size: A4
+:figure-caption: Abbildung
+:table-caption: Tabelle
+:toc: preamble
+
+// Deckblatt
+image::{logo}[alt="IIoT Gefahrenbereich-Warnsystem",width=400,height=400,align="center"]
+
+Modul: Busines Process Automation (BPA)
+
+Studiengang: Angewandte Informatik
+
+Professor: Prof. Dr. Dirk Reichelt
+
+Teammitglieder:
+
+* Alexander Schulz (55297)
+* Janne Puschke (55436)
+* Magnus Andreas Böhne ()
+* Matthias Kernke (53513)
+
+<<<
 
 == Einführung
 
-Diese Applikation wurde für das IIoT Testbed der HTWD Dresden entwickelt, um Mitarbeitende vor Gefahrenbereichen zu warnen. Das System überwacht Druckluftversorgungssysteme und erkennt Störungen wie Druckabfälle. Wenn ein Mitarbeiter einen Bereich mit einer technischen Störung betritt, erhält dieser eine Warnung über einen speziellen Handschuh mit Vibrationsfeedback.
-
-image::{logo}[alt="IIoT Gefahrenbereich-Warnsystem",width=200,height=200,align="center"]
+In modernen Produktionsanlagen können Störungen in Druckluftsystemen gefährliche Situationen verursachen, insbesondere wenn Mitarbeitende keine unmittelbare Kenntnis dieser Probleme haben. Dieses Projekt nutzt die Kombination aus Echtzeit-Sensorüberwachung, Positionsdatenerfassung und haptischem Feedback, um eine proaktive Warnlösung zu schaffen. Das System wurde für das IIoT Testbed der HTWD Dresden entwickelt und demonstriert die praktische Anwendung von IIoT-Technologien zur Erhöhung der Betriebssicherheit.
+Bei erkannten Druckluftstörungen und gleichzeitiger Anwesenheit eines Mitarbeiters im Gefahrenbereich erfolgt eine Warnung über einen speziellen Handschuh mit Vibrationsfeedback, was die Reaktionszeit verkürzt und potenzielle Unfälle verhindert.
 
 include::architektur.adoc[]
 
+<<<
+
 include::artefakte.adoc[]
 
+<<<
+
 include::installation.adoc[]
+
+== Ausblick
+
+Das System bietet eine solide Grundlage für die Überwachung von Gefahrenbereichen in industriellen Umgebungen. Zukünftige Erweiterungen könnten Folgendes umfassen:
+
+* Integration weiterer Sensoren (z.B. Temperatur, Feuchtigkeit)
+* Erweiterung der Regelwerke in Drools für komplexere Szenarien
+* System gegen Netzwerkstörungen absichern
