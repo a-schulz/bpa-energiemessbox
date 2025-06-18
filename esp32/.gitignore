@@ -10,3 +10,4 @@
 cmake-build-*S
 
 .vscode
+secret.h
