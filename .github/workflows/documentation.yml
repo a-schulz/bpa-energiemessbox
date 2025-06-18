@@ -1,12 +1,12 @@
-name: Convert and Publish Documentation
+name: Generate and Publish PDF Documentation
 
 on:
   push:
     branches:
-      - deactivated
+      - main
 
 jobs:
-  convert-documentation:
+  generate-documentation:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,15 +18,19 @@ jobs:
         with:
           ruby-version: '3.0'
 
-      - name: Install asciidoctor
-        run: gem install asciidoctor
+      - name: Install asciidoctor-pdf
+        run: gem install asciidoctor-pdf
 
-      - name: Convert AsciiDoc to HTML
-        run: asciidoctor -o Dokumentation.html Dokumentation.adoc
+      - name: Generate PDF from AsciiDoc
+        run: asciidoctor-pdf -o Dokumentation.pdf Dokumentation.adoc
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          destination_dir: docs
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Commit PDF file
+        run: |
+          git add Dokumentation.pdf
+          git commit -m "Update documentation PDF" || echo "No changes to commit"
+          git push origin main
