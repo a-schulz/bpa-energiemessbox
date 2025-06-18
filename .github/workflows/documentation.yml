@@ -1,0 +1,32 @@
+name: Convert and Publish Documentation
+
+on:
+  push:
+    branches:
+      - deactivated
+
+jobs:
+  convert-documentation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+
+      - name: Install asciidoctor
+        run: gem install asciidoctor
+
+      - name: Convert AsciiDoc to HTML
+        run: asciidoctor -o Dokumentation.html Dokumentation.adoc
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          destination_dir: docs

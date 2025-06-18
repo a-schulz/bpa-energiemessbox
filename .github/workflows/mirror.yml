@@ -1,0 +1,30 @@
+name: Mirror Repository
+
+on:
+  push:
+    branches:
+      - main  # Mirror when pushing to main branch
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.MIRROR_SSH_KEY }}
+
+      - name: Add SSH known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan iversion.informatik.htw-dresden.de >> ~/.ssh/known_hosts
+
+      - name: Push to mirror
+        run: |
+          git remote add mirror git@iversion.informatik.htw-dresden.de:s87649/bpa-energiemessbox.git
+          git push --mirror mirror
