@@ -106,10 +106,10 @@
       <dmn:annotation name="annotation-1"/>
       <dmn:rule id="_296094AF-C8F5-4490-B065-5373099B0808">
         <dmn:inputEntry id="_AE0047EB-5CC5-4CFF-983F-743F85B7FAC0">
-          <dmn:text>&lt;6</dmn:text>
+          <dmn:text>&lt;6.5</dmn:text>
         </dmn:inputEntry>
         <dmn:inputEntry id="_31303178-405A-44C7-ADAF-EC4A46CD2BC0">
-          <dmn:text>&gt;9</dmn:text>
+          <dmn:text>&gt;8</dmn:text>
         </dmn:inputEntry>
         <dmn:inputEntry id="_DC6678A8-3442-40FB-A370-4CABBF83CA82">
           <dmn:text>-</dmn:text>
