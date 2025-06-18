@@ -132,10 +132,13 @@ Der MQTT-Broker kann mit einem MQTT-Client wie MQTT Explorer (http://mqtt-explor
 
 Für die Inbetriebnahme des Handschuhs:
 
-1. Laden Sie die Firmware auf den ESP32
-2. Verbinden Sie den ESP32 mit dem WLAN-Netzwerk
-3. Konfigurieren Sie die MQTT-Verbindung mit der Broker-Adresse
-4. Überprüfen Sie die Vibrationsfunktion
+1. Laden Sie den ESP Ordner herunter und öffnen Sie es in einer PlattformIO Umgebung.
+2. Nennen Sie die dummysecret.h zu secret.h um.
+3. Ergänzen Sie die neue secret.h mit den Credentials.
+4. Verbinden Sie den ESP mit einem USB-C Kabel mit den PC und laden Sie die Software auf den Chip.
+5. Der ESP verbindet sich automatisch, wenn die Verbinung unterbrochen ist vibriert er nur alle Sekunden leicht.
+6. Wenn der ESP von Gelb zu Blau wechselt, ist er erfolgreich verbunden.
+7. Testen Sie einen Durchlauf.
 
 === Testen des Gesamtsystems
 
