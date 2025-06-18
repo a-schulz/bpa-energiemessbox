@@ -176,3 +176,24 @@ Für die Inbetriebnahme des Handschuhs:
 * Kontrollieren Sie die MQTT-Verbindung
 * Prüfen Sie die Batteriespannung
 * Testen Sie den Vibrationsmotor manuell
+
+
+==== AAS Probleme
+
+* unter http://localhost:8081/swagger-ui/index.html findet man die REST Doku der AAS Schnittstelle.
+** wichtige Endpunkte sind folgende:
+*** GET /shells : Gibt alle AAS zurück
+*** GET /submodels: Gibt alle Submodels zurück
+*** GET /submodels/:submodelIdentifier/$value: Gibt alle Werte des Submodels als JSON zurück. Achtung :submodelIdentifier durch echten Wert ersetzen. Dieser ist die id des submodels in UTF8-BASE64-URL enkodiert. Für das Submodel State ist dieser: c3RhdGU=
+*** PATCH /submodels/:submodelIdentifier/submodel-elements/:idShortPath/$value: Ändert den Wert: Ändert die Werte eines Submodels in der AAS.
+:submodelIdentifier ist wieder in UTF8-BASE64-URL enkodiert,:idShortPath ist ein einfacher String. Um z.B. den Werte Pressure im Submodel State zu ändern muss submodelIdentifier:c3RhdGU= und idShortPath:Pressure
+
+==== Zigpos Probleme
+
+* Für Zigpos sind folgende Endpunkte wichtig:
+** POST /rest/oauth/authorization/unauth-token Zum authentifizieren. Der Body ist url encode und hat folgende Parameter
+*** grant_type:password
+*** client_id:3039379a-119f-467c-8f94-6ea02b764b99
+*** username
+*** password
+** GET /rest/devices Um alle devices zu bekommen. Man muss sich vorher authentifizieren und den Token als Bearer Token mitgeben
