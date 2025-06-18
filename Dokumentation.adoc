@@ -50,4 +50,6 @@ Das System bietet eine solide Grundlage für die Überwachung von Gefahrenbereic
 
 * Integration weiterer Sensoren (z.B. Temperatur, Feuchtigkeit)
 * Erweiterung der Regelwerke in Drools für komplexere Szenarien
+* Entwicklung einer grafischen Bneutzeroberfläche zum Anpassen der Drools Regeln für die einfachere Benutzung von nicht technischen Benutzern.
+* Erweiterung des Feedbacks um audiovisuelle Elemente
 * System gegen Netzwerkstörungen absichern
