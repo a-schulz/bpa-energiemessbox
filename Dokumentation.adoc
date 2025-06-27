@@ -46,10 +46,38 @@ include::installation.adoc[]
 
 == Ausblick
 
-Das System bietet eine solide Grundlage für die Überwachung von Gefahrenbereichen in industriellen Umgebungen. Zukünftige Erweiterungen könnten Folgendes umfassen:
+Das IIoT Gefahrenbereich-Warnsystem bietet eine solide Grundlage für die Überwachung von Gefahrenbereichen in industriellen Umgebungen. Basierend auf den gesammelten Erfahrungen und dem aktuellen Stand der Implementierung lassen sich folgende Erweiterungsmöglichkeiten und zukünftige Entwicklungsrichtungen identifizieren:
 
-* Integration weiterer Sensoren (z.B. Temperatur, Feuchtigkeit)
-* Erweiterung der Regelwerke in Drools für komplexere Szenarien
-* Entwicklung einer grafischen Bneutzeroberfläche zum Anpassen der Drools Regeln für die einfachere Benutzung von nicht technischen Benutzern.
-* Erweiterung des Feedbacks um audiovisuelle Elemente
-* System gegen Netzwerkstörungen absichern
+=== Technische Erweiterungen
+
+* *Integration weiterer Sensoren*: Neben Druckluftdaten könnten Temperatur-, Feuchtigkeits-, Schadstoff- oder Lärmsensoren integriert werden, um ein umfassenderes Bild der Arbeitsumgebung zu erhalten.
+
+* *Multiuser-Unterstützung*: Erweiterung des Systems zur gleichzeitigen Überwachung mehrerer Personen mit individuellen Warnprofilen (aktuell wird nur nach einem spezifischen ZIGPOS-Tag gefiltert).
+
+* *Lokale Verarbeitung*: Implementation von Edge Computing zur Reduzierung der Netzwerklatenz und Erhöhung der Ausfallsicherheit.
+
+* *Verbesserte Netzwerkresilienz*: Implementierung von Fallback-Mechanismen und Datenpufferung bei Netzwerkunterbrechungen zwischen den Systemkomponenten.
+
+* *Erweiterung der Geofencing-Funktionalität*: Übertragung des Geofencings direkt in das ZIGPOS-System für präzisere Bereichsüberwachung und geringere Latenz.
+
+=== Geschäftsregelmanagement
+
+* *Dynamische Regelanpassung*: Entwicklung einer benutzerfreundlichen Web-Oberfläche für die Anpassung der Drools-Regeln ohne DMN-Editoren, um auch nicht-technischen Benutzern die Konfiguration zu ermöglichen.
+
+* *Komplexe Regelszenarien*: Erweiterung der Regelwerke für verschiedene Gefahrensituationen mit unterschiedlichen Warnungsstufen und dynamischen Gefahrenbereichen.
+
+* *Regel-Versionierung*: Implementierung eines Versionierungssystems für Geschäftsregeln mit Rollback-Möglichkeit und Änderungshistorie.
+
+=== Feedback-Systeme
+
+* *Multimodale Warnungen*: Erweiterung des Feedback-Systems um audiovisuelle Elemente zusätzlich zum haptischen Feedback.
+
+* *Abgestufte Warnungen*: Implementierung verschiedener Vibrationsmuster für unterschiedliche Gefahrenstufen oder -arten.
+
+=== Asset Administration Shell (AAS)
+
+* *PSA-Integration*: Modellierung der Persönlichen Schutzausrüstung (PSA) in der Asset Administration Shell, einschließlich des Handschuhs und seiner Position.
+
+* *AAS-basierte Geschäftsregeln*: Untersuchung der Möglichkeit, Geschäftsregeln direkt in der AAS als Operations zu hinterlegen für ein stärker integriertes Industrie 4.0-System.
+
+* *Digitale Zwillinge*: Erweiterung der digitalen Zwillinge um Simulationsfunktionalitäten zur prädikativen Wartung und Gefahrenerkennung.
