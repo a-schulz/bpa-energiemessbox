@@ -282,16 +282,6 @@
         "userprivatekey": ""
     },
     {
-        "id": "be35e6fcad5f3416",
-        "type": "comment",
-        "z": "88c44cb39fbde178",
-        "name": "WARNING: please check you have started this container with a volume that is mounted to /data\\n otherwise any flow changes are lost when you redeploy or upgrade the container\\n (e.g. upgrade to a more recent node-red docker image).\\n  If you are using named volumes you can ignore this warning.\\n Double click or see info side panel to learn how to start Node-RED in Docker to save your work",
-        "info": "\nTo start docker with a bind mount volume (-v option), for example:\n\n```\ndocker run -it -p 1880:1880 -v /home/user/node_red_data:/data --name mynodered nodered/node-red\n```\n\nwhere `/home/user/node_red_data` is a directory on your host machine where you want to store your flows.\n\nIf you do not do this then you can experiment and redploy flows, but if you restart or upgrade the container the flows will be disconnected and lost. \n\nThey will still exist in a hidden data volume, which can be recovered using standard docker techniques, but that is much more complex than just starting with a named volume as described above.",
-        "x": 350,
-        "y": 80,
-        "wires": []
-    },
-    {
         "id": "46bb9b69af58e65b",
         "type": "inject",
         "z": "88c44cb39fbde178",
@@ -364,7 +354,8 @@
         "y": 460,
         "wires": [
             [
-                "6df5120958e22792"
+                "6df5120958e22792",
+                "8c70060bd91da8f8"
             ],
             [],
             []
@@ -413,7 +404,8 @@
         "y": 540,
         "wires": [
             [
-                "416c851781cab3f2"
+                "416c851781cab3f2",
+                "bb95f4ff552aebd2"
             ],
             [],
             []
@@ -512,8 +504,8 @@
         "name": "",
         "server": "",
         "client": "1698a3fadda02d7c",
-        "x": 780,
-        "y": 1020,
+        "x": 860,
+        "y": 780,
         "wires": []
     },
     {
@@ -523,8 +515,8 @@
         "name": "",
         "server": "",
         "client": "1698a3fadda02d7c",
-        "x": 260,
-        "y": 940,
+        "x": 340,
+        "y": 700,
         "wires": [
             [
                 "4f3b794f49c6dc70"
@@ -546,10 +538,10 @@
         "once": true,
         "onceDelay": "8",
         "topic": "",
-        "payload": "{ \"topic\":\"REGISTER\", \"payload\":[\"POSITIONS\"] }",
+        "payload": "{\"topic\":\"REGISTER\",\"payload\":[\"POSITIONS\"]}",
         "payloadType": "json",
-        "x": 330,
-        "y": 1020,
+        "x": 410,
+        "y": 780,
         "wires": [
             [
                 "043844d2c9562eb4"
@@ -568,8 +560,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 590,
-        "y": 940,
+        "x": 670,
+        "y": 700,
         "wires": [
             [
                 "a81f470107faf233"
@@ -593,8 +585,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 210,
-        "y": 1220,
+        "x": 290,
+        "y": 980,
         "wires": [
             [
                 "433d3cd171a532a9"
@@ -617,8 +609,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 560,
-        "y": 1220,
+        "x": 640,
+        "y": 980,
         "wires": [
             [
                 "b6f196b73412f6c9"
@@ -637,8 +629,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
-        "y": 1220,
+        "x": 490,
+        "y": 980,
         "wires": [
             [
                 "8e4eb36b2d79edac"
@@ -657,8 +649,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 740,
-        "y": 1220,
+        "x": 820,
+        "y": 980,
         "wires": [
             [
                 "043844d2c9562eb4"
@@ -686,7 +678,7 @@
         "reduceInit": "",
         "reduceInitType": "",
         "reduceFixup": "",
-        "x": 1090,
+        "x": 990,
         "y": 640,
         "wires": [
             [
@@ -706,7 +698,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1330,
+        "x": 1230,
         "y": 640,
         "wires": [
             [
@@ -730,7 +722,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1620,
+        "x": 1480,
         "y": 640,
         "wires": [
             [
@@ -754,7 +746,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1840,
+        "x": 1700,
         "y": 600,
         "wires": [
             [
@@ -768,7 +760,7 @@
         "z": "88c44cb39fbde178",
         "name": "",
         "topic": "personInArea",
-        "qos": "2",
+        "qos": "1",
         "retain": "",
         "respTopic": "",
         "contentType": "",
@@ -776,7 +768,7 @@
         "correl": "",
         "expiry": "",
         "broker": "602fcdc3e4666768",
-        "x": 2180,
+        "x": 2040,
         "y": 500,
         "wires": []
     },
@@ -788,7 +780,7 @@
         "method": "use",
         "ret": "obj",
         "paytoqs": "ignore",
-        "url": "http://aas-env:8081/submodels/aHR0cHM6Ly9leGFtcGxlLmNvbS9pZHMvc20vNTQ2NV83MDAzXzQwNTJfMTg4Mw/submodel-elements/failure/$value",
+        "url": "http://aas-env:8081/submodels/aHR0cHM6Ly9leGFtcGxlLmNvbS9pZHMvc20vNTQ2NV83MDAzXzQwNTJfMTg4Mw/submodel-elements/hasMalfunction/$value",
         "tls": "",
         "persist": false,
         "proxy": "",
@@ -796,7 +788,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 2170,
+        "x": 2030,
         "y": 740,
         "wires": [
             []
@@ -814,7 +806,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1840,
+        "x": 1700,
         "y": 680,
         "wires": [
             [
@@ -834,34 +826,9 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1760,
+        "x": 1620,
         "y": 760,
         "wires": []
-    },
-    {
-        "id": "ec9e77d51516b31c",
-        "type": "change",
-        "z": "88c44cb39fbde178",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "",
-                "tot": "str"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 550,
-        "y": 800,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "28f2564d9bb7cf19",
@@ -880,7 +847,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1840,
+        "x": 1700,
         "y": 460,
         "wires": []
     },
@@ -901,8 +868,96 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1860,
+        "x": 1720,
         "y": 520,
         "wires": []
+    },
+    {
+        "id": "8c70060bd91da8f8",
+        "type": "ui_chart",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "group": "825a8a13d1d72f3c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "AirPressure",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "7",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 790,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bb95f4ff552aebd2",
+        "type": "ui_chart",
+        "z": "88c44cb39fbde178",
+        "name": "",
+        "group": "825a8a13d1d72f3c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "AirFlow",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "30",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 780,
+        "y": 400,
+        "wires": [
+            []
+        ]
     }
 ]
